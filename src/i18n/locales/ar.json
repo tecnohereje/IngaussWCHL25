@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "مجهول",
+      "wallet_identified": "لقد تعرفنا على محفظتك بنجاح.",
+      "not_available": "غير متاح"
+    },
+    "login": {
+      "welcome": "مرحباً بك في Ingauss",
+      "prompt": "يرجى تسجيل الدخول للمتابعة.",
+      "button": "تسجيل الدخول باستخدام NFID",
+      "ii_button": "تسجيل الدخول باستخدام Internet Identity",
+      "loading": "جار التحميل...",
+      "logo_alt": "شعار التطبيق",
+      "dev_mode_prompt": "وضع المطور: المصادقة معطلة.",
+      "dev_mode_button": "الدخول مباشرة"
+    },
+    "profile": {
+      "username_placeholder": "اسم المستخدم",
+      "logout_button": "تسجيل الخروج"
+    },
+    "dashboard": {
+      "settings_button": "منطقة الإعدادات",
+      "testing_button": "منطقة الاختبار"
+    },
+    "settings": {
+      "title": "الإعدادات",
+      "tab_personal": "المعلومات الشخصية",
+      "tab_social": "وسائل التواصل الاجتماعي",
+      "tab_job": "تفضيلات الوظيفة",
+      "personal_form": {
+        "profile_pic": "صورة الملف الشخصي",
+        "cv_label": "السيرة الذاتية (PDF)",
+        "full_name": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "bio": "عني",
+        "searching": "هل تبحث بنشاط عن عمل؟",
+        "share_contact": "هل تريد مشاركة معلومات الاتصال مع وكلاء النظام؟",
+        "save_button": "حفظ التغييرات",
+        "saving_button": "جار الحفظ..."
+      },
+      "social_form": {
+        "network_name": "اسم الشبكة",
+        "url": "الرابط",
+        "add_social": "إضافة شبكة اجتماعية",
+        "remove_social": "إزالة",
+        "generic_url_placeholder": "أدخل الرابط الكامل (مثال: https://...)"
+      },
+      "job_form": {
+        "location": "موقع العمل",
+        "location_onsite": "في الموقع",
+        "location_hybrid": "هجين",
+        "location_remote": "عن بعد",
+        "salary": "نطاق الراتب السنوي (بالدولار الأمريكي)",
+        "workplace_tags": "علامات مكان العمل المثالي",
+        "timezone": "المنطقة الزمنية المفضلة",
+        "timezone_placeholder": "اختر منطقة زمنية..."
+      },
+      "timezones": {
+        "americas": "الأمريكتان",
+        "europe_africa": "أوروبا / أفريقيا",
+        "asia": "آسيا",
+        "oceania": "أوقيانوسيا"
+      },
+      "api_error": {
+        "title": "خطأ",
+        "message": "لا يمكن حفظ الإعدادات. يرجى المحاولة مرة أخرى في وقت لاحق.",
+        "close_button": "إغلاق"
+      },
+      "api_success": {
+        "title": "نجاح!",
+        "message": "تم حفظ إعداداتك بنجاح.",
+        "close_button": "متابعة"
+      },
+      "tags": {
+        "good_culture": "ثقافة جيدة",
+        "growth_opportunities": "فرص للنمو",
+        "innovative_culture": "ثقافة مبتكرة",
+        "diverse_team": "فريق متنوع",
+        "flexible_remote": "عمل مرن عن بعد",
+        "competitive_salary": "راتب تنافسي",
+        "high_impact_projects": "مشاريع ذات تأثير كبير",
+        "cutting_edge_tech": "تقنية متطورة",
+        "autonomy": "استقلالية",
+        "health_benefits": "مزايا صحية",
+        "training": "تدريب مستمر",
+        "collaborative_environment": "بيئة تعاونية"
+      }
+    },
+    "language_modal": {
+      "title": "اختر لغة",
+      "description": "اختر لغتك المفضلة للتطبيق."
+    },
+    "user_profile_modal": {
+      "title": "ملف المستخدم",
+      "full_name": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "principal_id": "المعرف الرئيسي",
+      "level": "المستوى",
+      "balance": "الرصيد",
+      "withdraw_button": "سحب المكافآت",
+      "withdraw_title": "سحب المكافآت",
+      "withdraw_exchange": "اذهب إلى المنصة",
+      "withdraw_p2p": "P2P داخلي",
+      "stats_title": "إحصائيات المنصة",
+      "score": "النتيجة",
+      "experience": "الخبرة",
+      "total_playtime": "إجمالي وقت اللعب",
+      "last_played": "آخر مرة لعبت فيها",
+      "sponsors_title": "الرعاة المحتملون"
+    }
+  }
+}

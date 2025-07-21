@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "Аноним",
+      "wallet_identified": "Мы успешно определили ваш кошелек.",
+      "not_available": "Недоступно"
+    },
+    "login": {
+      "welcome": "Добро пожаловать в Ingauss",
+      "prompt": "Пожалуйста, войдите, чтобы продолжить.",
+      "button": "Войти через NFID",
+      "ii_button": "Войти через Internet Identity",
+      "loading": "Загрузка...",
+      "logo_alt": "Логотип приложения",
+      "dev_mode_prompt": "Режим разработчика: Аутентификация отключена.",
+      "dev_mode_button": "Войти напрямую"
+    },
+    "profile": {
+      "username_placeholder": "Имя пользователя",
+      "logout_button": "Выйти"
+    },
+    "dashboard": {
+      "settings_button": "Зона настроек",
+      "testing_button": "Зона тестирования"
+    },
+    "settings": {
+      "title": "Настройки",
+      "tab_personal": "Личная информация",
+      "tab_social": "Социальные сети",
+      "tab_job": "Предпочтения по работе",
+      "personal_form": {
+        "profile_pic": "Фото профиля",
+        "cv_label": "Резюме (PDF)",
+        "full_name": "Полное имя",
+        "email": "Эл. почта",
+        "bio": "О себе",
+        "searching": "Активно ищете работу?",
+        "share_contact": "Поделиться контактной информацией с системными агентами?",
+        "save_button": "Сохранить изменения",
+        "saving_button": "Сохранение..."
+      },
+      "social_form": {
+        "network_name": "Название сети",
+        "url": "URL",
+        "add_social": "Добавить социальную сеть",
+        "remove_social": "Удалить",
+        "generic_url_placeholder": "Введите полный URL (например, https://...)"
+      },
+      "job_form": {
+        "location": "Место работы",
+        "location_onsite": "В офисе",
+        "location_hybrid": "Гибридный",
+        "location_remote": "Удаленно",
+        "salary": "Годовой диапазон зарплат (USD)",
+        "workplace_tags": "Теги идеального рабочего места",
+        "timezone": "Предпочитаемый часовой пояс",
+        "timezone_placeholder": "Выберите часовой пояс..."
+      },
+      "timezones": {
+        "americas": "Америка",
+        "europe_africa": "Европа / Африка",
+        "asia": "Азия",
+        "oceania": "Океания"
+      },
+      "api_error": {
+        "title": "Ошибка",
+        "message": "Не удалось сохранить настройки. Пожалуйста, повторите попытку позже.",
+        "close_button": "Закрыть"
+      },
+      "api_success": {
+        "title": "Успех!",
+        "message": "Ваши настройки были успешно сохранены.",
+        "close_button": "Продолжить"
+      },
+      "tags": {
+        "good_culture": "Хорошая культура",
+        "growth_opportunities": "Возможности для роста",
+        "innovative_culture": "Инновационная культура",
+        "diverse_team": "Разнообразная команда",
+        "flexible_remote": "Гибкая удаленная работа",
+        "competitive_salary": "Конкурентоспособная зарплата",
+        "high_impact_projects": "Значимые проекты",
+        "cutting_edge_tech": "Передовые технологии",
+        "autonomy": "Автономность",
+        "health_benefits": "Медицинские льготы",
+        "training": "Непрерывное обучение",
+        "collaborative_environment": "Среда для совместной работы"
+      }
+    },
+    "language_modal": {
+      "title": "Выберите язык",
+      "description": "Выберите предпочитаемый язык для приложения."
+    },
+    "user_profile_modal": {
+      "title": "Профиль пользователя",
+      "full_name": "Полное имя",
+      "email": "Эл. почта",
+      "principal_id": "Principal ID",
+      "level": "Уровень",
+      "balance": "Баланс",
+      "withdraw_button": "Вывести вознаграждения",
+      "withdraw_title": "Вывести вознаграждения",
+      "withdraw_exchange": "Перейти на биржу",
+      "withdraw_p2p": "Внутренний P2P",
+      "stats_title": "Статистика платформы",
+      "score": "Счет",
+      "experience": "Опыт",
+      "total_playtime": "Общее время игры",
+      "last_played": "Последняя игра",
+      "sponsors_title": "Потенциальные спонсоры"
+    }
+  }
+}

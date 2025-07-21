@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "익명",
+      "wallet_identified": "지갑을 성공적으로 확인했습니다.",
+      "not_available": "사용 불가"
+    },
+    "login": {
+      "welcome": "Ingauss에 오신 것을 환영합니다",
+      "prompt": "계속하려면 로그인하세요.",
+      "button": "NFID로 로그인",
+      "ii_button": "인터넷 아이덴티티로 로그인",
+      "loading": "로드 중...",
+      "logo_alt": "애플리케이션 로고",
+      "dev_mode_prompt": "개발 모드: 인증이 비활성화되었습니다.",
+      "dev_mode_button": "직접 입장"
+    },
+    "profile": {
+      "username_placeholder": "사용자 이름",
+      "logout_button": "로그아웃"
+    },
+    "dashboard": {
+      "settings_button": "설정 영역",
+      "testing_button": "테스트 영역"
+    },
+    "settings": {
+      "title": "설정",
+      "tab_personal": "개인 정보",
+      "tab_social": "소셜 미디어",
+      "tab_job": "직업 선호도",
+      "personal_form": {
+        "profile_pic": "프로필 사진",
+        "cv_label": "이력서 (PDF)",
+        "full_name": "전체 이름",
+        "email": "이메일",
+        "bio": "자기 소개",
+        "searching": "적극적으로 구직 중이신가요?",
+        "share_contact": "시스템 에이전트와 연락처 정보를 공유하시겠습니까?",
+        "save_button": "변경 사항 저장",
+        "saving_button": "저장 중..."
+      },
+      "social_form": {
+        "network_name": "네트워크 이름",
+        "url": "URL",
+        "add_social": "소셜 네트워크 추가",
+        "remove_social": "삭제",
+        "generic_url_placeholder": "전체 URL 입력 (예: https://...)"
+      },
+      "job_form": {
+        "location": "근무 위치",
+        "location_onsite": "사무실 근무",
+        "location_hybrid": "하이브리드",
+        "location_remote": "원격 근무",
+        "salary": "연봉 범위 (USD)",
+        "workplace_tags": "이상적인 직장 태그",
+        "timezone": "선호하는 시간대",
+        "timezone_placeholder": "시간대 지역 선택..."
+      },
+      "timezones": {
+        "americas": "아메리카",
+        "europe_africa": "유럽 / 아프리카",
+        "asia": "아시아",
+        "oceania": "오세아니아"
+      },
+      "api_error": {
+        "title": "오류",
+        "message": "설정을 저장할 수 없습니다. 나중에 다시 시도하십시오.",
+        "close_button": "닫기"
+      },
+      "api_success": {
+        "title": "성공!",
+        "message": "설정이 성공적으로 저장되었습니다.",
+        "close_button": "계속"
+      },
+      "tags": {
+        "good_culture": "좋은 문화",
+        "growth_opportunities": "성장 기회",
+        "innovative_culture": "혁신적인 문화",
+        "diverse_team": "다양한 팀",
+        "flexible_remote": "유연한 원격 근무",
+        "competitive_salary": "경쟁력 있는 급여",
+        "high_impact_projects": "영향력 있는 프로젝트",
+        "cutting_edge_tech": "최첨단 기술",
+        "autonomy": "자율성",
+        "health_benefits": "건강 혜택",
+        "training": "지속적인 교육",
+        "collaborative_environment": "협업 환경"
+      }
+    },
+    "language_modal": {
+      "title": "언어를 선택하세요",
+      "description": "애플리케이션에 사용할 기본 언어를 선택하세요."
+    },
+    "user_profile_modal": {
+      "title": "사용자 프로필",
+      "full_name": "전체 이름",
+      "email": "이메일",
+      "principal_id": "Principal ID",
+      "level": "레벨",
+      "balance": "잔액",
+      "withdraw_button": "보상 인출",
+      "withdraw_title": "보상 인출",
+      "withdraw_exchange": "거래소로 이동",
+      "withdraw_p2p": "내부 P2P",
+      "stats_title": "플랫폼 통계",
+      "score": "점수",
+      "experience": "경험",
+      "total_playtime": "총 플레이 시간",
+      "last_played": "마지막 플레이",
+      "sponsors_title": "잠재적 스폰서"
+    }
+  }
+}

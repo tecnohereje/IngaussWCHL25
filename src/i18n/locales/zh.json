@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "匿名",
+      "wallet_identified": "我们已成功识别您的钱包。",
+      "not_available": "不可用"
+    },
+    "login": {
+      "welcome": "欢迎来到 Ingauss",
+      "prompt": "请登录以继续。",
+      "button": "使用 NFID 登录",
+      "ii_button": "使用 Internet Identity 登录",
+      "loading": "加载中...",
+      "logo_alt": "应用程序徽标",
+      "dev_mode_prompt": "开发模式：身份验证已禁用。",
+      "dev_mode_button": "直接进入"
+    },
+    "profile": {
+      "username_placeholder": "用户名",
+      "logout_button": "登出"
+    },
+    "dashboard": {
+      "settings_button": "设置区",
+      "testing_button": "测试区"
+    },
+    "settings": {
+      "title": "设置",
+      "tab_personal": "个人信息",
+      "tab_social": "社交媒体",
+      "tab_job": "工作偏好",
+      "personal_form": {
+        "profile_pic": "头像",
+        "cv_label": "简历 (PDF)",
+        "full_name": "全名",
+        "email": "电子邮件",
+        "bio": "关于我",
+        "searching": "正在积极找工作吗？",
+        "share_contact": "与系统代理共享联系信息吗？",
+        "save_button": "保存更改",
+        "saving_button": "保存中..."
+      },
+      "social_form": {
+        "network_name": "网络名称",
+        "url": "网址",
+        "add_social": "添加社交网络",
+        "remove_social": "删除",
+        "generic_url_placeholder": "输入完整网址 (例如 https://...)"
+      },
+      "job_form": {
+        "location": "工作地点",
+        "location_onsite": "现场",
+        "location_hybrid": "混合",
+        "location_remote": "远程",
+        "salary": "年薪范围 (USD)",
+        "workplace_tags": "理想工作标签",
+        "timezone": "首选时区",
+        "timezone_placeholder": "选择一个时区..."
+      },
+      "timezones": {
+        "americas": "美洲",
+        "europe_africa": "欧洲 / 非洲",
+        "asia": "亚洲",
+        "oceania": "大洋洲"
+      },
+      "api_error": {
+        "title": "错误",
+        "message": "无法保存设置。请稍后再试。",
+        "close_button": "关闭"
+      },
+      "api_success": {
+        "title": "成功！",
+        "message": "您的设置已成功保存。",
+        "close_button": "继续"
+      },
+      "tags": {
+        "good_culture": "良好文化",
+        "growth_opportunities": "成长机会",
+        "innovative_culture": "创新文化",
+        "diverse_team": "多元化团队",
+        "flexible_remote": "灵活远程",
+        "competitive_salary": "有竞争力的薪酬",
+        "high_impact_projects": "高影响力项目",
+        "cutting_edge_tech": "前沿技术",
+        "autonomy": "自主权",
+        "health_benefits": "健康福利",
+        "training": "持续培训",
+        "collaborative_environment": "协作环境"
+      }
+    },
+    "language_modal": {
+      "title": "选择一种语言",
+      "description": "为应用程序选择您的首选语言。"
+    },
+    "user_profile_modal": {
+      "title": "用户个人资料",
+      "full_name": "全名",
+      "email": "电子邮件",
+      "principal_id": "Principal ID",
+      "level": "等级",
+      "balance": "余额",
+      "withdraw_button": "提取奖励",
+      "withdraw_title": "提取奖励",
+      "withdraw_exchange": "前往交易所",
+      "withdraw_p2p": "内部 P2P",
+      "stats_title": "平台统计",
+      "score": "分数",
+      "experience": "经验",
+      "total_playtime": "总游戏时间",
+      "last_played": "上次游戏",
+      "sponsors_title": "潜在赞助商"
+    }
+  }
+}

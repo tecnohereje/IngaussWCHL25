@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "Anonyme",
+      "wallet_identified": "Nous avons correctement identifié votre portefeuille.",
+      "not_available": "Non disponible"
+    },
+    "login": {
+      "welcome": "Bienvenue chez Ingauss",
+      "prompt": "Veuillez vous connecter pour continuer.",
+      "button": "Se connecter avec NFID",
+      "ii_button": "Se connecter avec Internet Identity",
+      "loading": "Chargement...",
+      "logo_alt": "Logo de l'application",
+      "dev_mode_prompt": "Mode développement : Authentification désactivée.",
+      "dev_mode_button": "Entrer directement"
+    },
+    "profile": {
+      "username_placeholder": "Nom d'utilisateur",
+      "logout_button": "Déconnexion"
+    },
+    "dashboard": {
+      "settings_button": "Zone de Configuration",
+      "testing_button": "Zone de Test"
+    },
+    "settings": {
+      "title": "Paramètres",
+      "tab_personal": "Infos Personnelles",
+      "tab_social": "Réseaux Sociaux",
+      "tab_job": "Préférences d'Emploi",
+      "personal_form": {
+        "profile_pic": "Photo de Profil",
+        "cv_label": "CV (PDF)",
+        "full_name": "Nom Complet",
+        "email": "E-mail",
+        "bio": "À propos de moi",
+        "searching": "En recherche active d'emploi ?",
+        "share_contact": "Partager les informations de contact avec les agents du système ?",
+        "save_button": "Enregistrer les modifications",
+        "saving_button": "Enregistrement..."
+      },
+      "social_form": {
+        "network_name": "Nom du Réseau",
+        "url": "URL",
+        "add_social": "Ajouter un Réseau Social",
+        "remove_social": "Supprimer",
+        "generic_url_placeholder": "Entrez l'URL complète (ex: https://...)"
+      },
+      "job_form": {
+        "location": "Lieu de Travail",
+        "location_onsite": "Sur Site",
+        "location_hybrid": "Hybride",
+        "location_remote": "À Distance",
+        "salary": "Fourchette Salariale Annuelle (USD)",
+        "workplace_tags": "Tags de l'Emploi Idéal",
+        "timezone": "Fuseau Horaire Préféré",
+        "timezone_placeholder": "Sélectionnez une région de fuseau horaire..."
+      },
+      "timezones": {
+        "americas": "Amériques",
+        "europe_africa": "Europe / Afrique",
+        "asia": "Asie",
+        "oceania": "Océanie"
+      },
+      "api_error": {
+        "title": "Erreur",
+        "message": "Impossible d'enregistrer les paramètres. Veuillez réessayer plus tard.",
+        "close_button": "Fermer"
+      },
+      "api_success": {
+        "title": "Succès !",
+        "message": "Vos paramètres ont été enregistrés avec succès.",
+        "close_button": "Continuer"
+      },
+      "tags": {
+        "good_culture": "Bonne Culture",
+        "growth_opportunities": "Opportunités de Croissance",
+        "innovative_culture": "Culture Innovante",
+        "diverse_team": "Équipe Diverse",
+        "flexible_remote": "Télétravail Flexible",
+        "competitive_salary": "Salaire Compétitif",
+        "high_impact_projects": "Projets à Fort Impact",
+        "cutting_edge_tech": "Technologie de Pointe",
+        "autonomy": "Autonomie",
+        "health_benefits": "Avantages Sociaux",
+        "training": "Formation Continue",
+        "collaborative_environment": "Environnement Collaboratif"
+      }
+    },
+    "language_modal": {
+      "title": "Sélectionnez une Langue",
+      "description": "Choisissez votre langue préférée pour l'application."
+    },
+    "user_profile_modal": {
+      "title": "Profil Utilisateur",
+      "full_name": "Nom Complet",
+      "email": "E-mail",
+      "principal_id": "ID Principal",
+      "level": "Niveau",
+      "balance": "Solde",
+      "withdraw_button": "Retirer les Récompenses",
+      "withdraw_title": "Retirer les Récompenses",
+      "withdraw_exchange": "Aller à l'Exchange",
+      "withdraw_p2p": "P2P Interne",
+      "stats_title": "Statistiques de la Plateforme",
+      "score": "Score",
+      "experience": "Expérience",
+      "total_playtime": "Temps de Jeu Total",
+      "last_played": "Dernière partie jouée",
+      "sponsors_title": "Sponsors Potentiels"
+    }
+  }
+}

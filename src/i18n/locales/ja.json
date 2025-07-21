@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "匿名",
+      "wallet_identified": "ウォレットは正常に識別されました。",
+      "not_available": "利用不可"
+    },
+    "login": {
+      "welcome": "Ingaussへようこそ",
+      "prompt": "続行するにはログインしてください。",
+      "button": "NFIDでログイン",
+      "ii_button": "インターネットアイデンティティでログイン",
+      "loading": "読み込み中...",
+      "logo_alt": "アプリケーションのロゴ",
+      "dev_mode_prompt": "開発モード：認証は無効です。",
+      "dev_mode_button": "直接入力"
+    },
+    "profile": {
+      "username_placeholder": "ユーザー名",
+      "logout_button": "ログアウト"
+    },
+    "dashboard": {
+      "settings_button": "設定ゾーン",
+      "testing_button": "テストゾーン"
+    },
+    "settings": {
+      "title": "設定",
+      "tab_personal": "個人情報",
+      "tab_social": "ソーシャルメディア",
+      "tab_job": "希望職種",
+      "personal_form": {
+        "profile_pic": "プロフィール写真",
+        "cv_label": "履歴書 (PDF)",
+        "full_name": "フルネーム",
+        "email": "メールアドレス",
+        "bio": "自己紹介",
+        "searching": "積極的に求職中ですか？",
+        "share_contact": "連絡先情報をシステムエージェントと共有しますか？",
+        "save_button": "変更を保存",
+        "saving_button": "保存中..."
+      },
+      "social_form": {
+        "network_name": "ネットワーク名",
+        "url": "URL",
+        "add_social": "ソーシャルネットワークを追加",
+        "remove_social": "削除",
+        "generic_url_placeholder": "完全なURLを入力してください (例: https://...)"
+      },
+      "job_form": {
+        "location": "勤務地",
+        "location_onsite": "オンサイト",
+        "location_hybrid": "ハイブリッド",
+        "location_remote": "リモート",
+        "salary": "年収範囲 (USD)",
+        "workplace_tags": "理想的な職場のタグ",
+        "timezone": "希望のタイムゾーン",
+        "timezone_placeholder": "タイムゾーン地域を選択..."
+      },
+      "timezones": {
+        "americas": "南北アメリカ",
+        "europe_africa": "ヨーロッパ・アフリカ",
+        "asia": "アジア",
+        "oceania": "オセアニア"
+      },
+      "api_error": {
+        "title": "エラー",
+        "message": "設定を保存できませんでした。後でもう一度お試しください。",
+        "close_button": "閉じる"
+      },
+      "api_success": {
+        "title": "成功しました！",
+        "message": "設定は正常に保存されました。",
+        "close_button": "続ける"
+      },
+      "tags": {
+        "good_culture": "良い文化",
+        "growth_opportunities": "成長の機会",
+        "innovative_culture": "革新的な文化",
+        "diverse_team": "多様なチーム",
+        "flexible_remote": "柔軟なリモートワーク",
+        "competitive_salary": "競争力のある給与",
+        "high_impact_projects": "影響力の大きいプロジェクト",
+        "cutting_edge_tech": "最先端技術",
+        "autonomy": "自主性",
+        "health_benefits": "健康手当",
+        "training": "継続的な研修",
+        "collaborative_environment": "協調的な環境"
+      }
+    },
+    "language_modal": {
+      "title": "言語を選択してください",
+      "description": "アプリケーションの優先言語を選択してください。"
+    },
+    "user_profile_modal": {
+      "title": "ユーザープロフィール",
+      "full_name": "フルネーム",
+      "email": "メールアドレス",
+      "principal_id": "プリンシパルID",
+      "level": "レベル",
+      "balance": "残高",
+      "withdraw_button": "報酬を引き出す",
+      "withdraw_title": "報酬を引き出す",
+      "withdraw_exchange": "取引所に移動",
+      "withdraw_p2p": "内部P2P",
+      "stats_title": "プラットフォーム統計",
+      "score": "スコア",
+      "experience": "経験値",
+      "total_playtime": "総プレイ時間",
+      "last_played": "最終プレイ日時",
+      "sponsors_title": "潜在的なスポンサー"
+    }
+  }
+}

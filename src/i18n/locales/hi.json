@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "अनाम",
+      "wallet_identified": "हमने आपके वॉलेट की सही पहचान कर ली है।",
+      "not_available": "उपलब्ध नहीं है"
+    },
+    "login": {
+      "welcome": "Ingauss में आपका स्वागत है",
+      "prompt": "जारी रखने के लिए कृपया लॉग इन करें।",
+      "button": "एनएफआईडी से लॉग इन करें",
+      "ii_button": "इंटरनेट आइडेंटिटी से लॉग इन करें",
+      "loading": "लोड हो रहा है...",
+      "logo_alt": "एप्लिकेशन का लोगो",
+      "dev_mode_prompt": "डेवलपर मोड: प्रमाणीकरण अक्षम है।",
+      "dev_mode_button": "सीधे प्रवेश करें"
+    },
+    "profile": {
+      "username_placeholder": "उपयोगकर्ता नाम",
+      "logout_button": "लॉग आउट"
+    },
+    "dashboard": {
+      "settings_button": "सेटिंग्स जोन",
+      "testing_button": "टेस्टिंग जोन"
+    },
+    "settings": {
+      "title": "सेटिंग्स",
+      "tab_personal": "व्यक्तिगत जानकारी",
+      "tab_social": "सोशल मीडिया",
+      "tab_job": "नौकरी वरीयताएँ",
+      "personal_form": {
+        "profile_pic": "प्रोफ़ाइल तस्वीर",
+        "cv_label": "सीवी (PDF)",
+        "full_name": "पूरा नाम",
+        "email": "ईमेल",
+        "bio": "मेरे बारे में",
+        "searching": "क्या आप सक्रिय रूप से नौकरी खोज रहे हैं?",
+        "share_contact": "सिस्टम एजेंटों के साथ संपर्क जानकारी साझा करें?",
+        "save_button": "बदलाव सहेजें",
+        "saving_button": "सहेज रहा है..."
+      },
+      "social_form": {
+        "network_name": "नेटवर्क का नाम",
+        "url": "यूआरएल",
+        "add_social": "सोशल नेटवर्क जोड़ें",
+        "remove_social": "हटाएं",
+        "generic_url_placeholder": "पूरा यूआरएल दर्ज करें (उदाहरण: https://...)"
+      },
+      "job_form": {
+        "location": "कार्य स्थल",
+        "location_onsite": "साइट पर",
+        "location_hybrid": "हाइब्रिड",
+        "location_remote": "रिमोट",
+        "salary": "वार्षिक वेतन सीमा (USD)",
+        "workplace_tags": "आदर्श कार्यस्थल टैग",
+        "timezone": "पसंदीदा समय क्षेत्र",
+        "timezone_placeholder": "एक समय क्षेत्र चुनें..."
+      },
+      "timezones": {
+        "americas": "अमेरिका",
+        "europe_africa": "यूरोप / अफ्रीका",
+        "asia": "एशिया",
+        "oceania": "ओशिनिया"
+      },
+      "api_error": {
+        "title": "त्रुटि",
+        "message": "सेटिंग्स सहेजी नहीं जा सकीं। कृपया बाद में पुनः प्रयास करें।",
+        "close_button": "बंद करें"
+      },
+      "api_success": {
+        "title": "सफलता!",
+        "message": "आपकी सेटिंग्स सफलतापूर्वक सहेज ली गई हैं।",
+        "close_button": "जारी रखें"
+      },
+      "tags": {
+        "good_culture": "अच्छी संस्कृति",
+        "growth_opportunities": "विकास के अवसर",
+        "innovative_culture": "अभिनव संस्कृति",
+        "diverse_team": "विविध टीम",
+        "flexible_remote": "लचीला रिमोट",
+        "competitive_salary": "प्रतिस्पर्धी वेतन",
+        "high_impact_projects": "उच्च प्रभाव वाली परियोजनाएं",
+        "cutting_edge_tech": "अत्याधुनिक तकनीक",
+        "autonomy": "स्वायत्तता",
+        "health_benefits": "स्वास्थ्य लाभ",
+        "training": "सतत प्रशिक्षण",
+        "collaborative_environment": "सहयोगी वातावरण"
+      }
+    },
+    "language_modal": {
+      "title": "एक भाषा चुनें",
+      "description": "एप्लिकेशन के लिए अपनी पसंदीदा भाषा चुनें।"
+    },
+    "user_profile_modal": {
+      "title": "उपयोगकर्ता प्रोफ़ाइल",
+      "full_name": "पूरा नाम",
+      "email": "ईमेल",
+      "principal_id": "प्रिंसिपल आईडी",
+      "level": "स्तर",
+      "balance": "शेष राशि",
+      "withdraw_button": "पुरस्कार निकालें",
+      "withdraw_title": "पुरस्कार निकालें",
+      "withdraw_exchange": "एक्सचेंज पर जाएं",
+      "withdraw_p2p": "आंतरिक पी2पी",
+      "stats_title": "प्लेटफ़ॉर्म आँकड़े",
+      "score": "स्कोर",
+      "experience": "अनुभव",
+      "total_playtime": "कुल खेलने का समय",
+      "last_played": "पिछली बार खेला गया",
+      "sponsors_title": "संभावित प्रायोजक"
+    }
+  }
+}

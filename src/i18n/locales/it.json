@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "Anonimo",
+      "wallet_identified": "Abbiamo identificato correttamente il tuo portafoglio.",
+      "not_available": "Non disponibile"
+    },
+    "login": {
+      "welcome": "Benvenuto in Ingauss",
+      "prompt": "Effettua il login per continuare.",
+      "button": "Accedi con NFID",
+      "ii_button": "Accedi con Internet Identity",
+      "loading": "Caricamento...",
+      "logo_alt": "Logo dell'applicazione",
+      "dev_mode_prompt": "Modalità Sviluppatore: Autenticazione disattivata.",
+      "dev_mode_button": "Entra direttamente"
+    },
+    "profile": {
+      "username_placeholder": "Nome utente",
+      "logout_button": "Esci"
+    },
+    "dashboard": {
+      "settings_button": "Area Impostazioni",
+      "testing_button": "Area Test"
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "tab_personal": "Info Personali",
+      "tab_social": "Social Media",
+      "tab_job": "Preferenze Lavorative",
+      "personal_form": {
+        "profile_pic": "Immagine del Profilo",
+        "cv_label": "CV (PDF)",
+        "full_name": "Nome Completo",
+        "email": "Email",
+        "bio": "Su di me",
+        "searching": "Stai cercando lavoro attivamente?",
+        "share_contact": "Condividere le informazioni di contatto con gli agenti di sistema?",
+        "save_button": "Salva Modifiche",
+        "saving_button": "Salvataggio..."
+      },
+      "social_form": {
+        "network_name": "Nome Rete",
+        "url": "URL",
+        "add_social": "Aggiungi Social Network",
+        "remove_social": "Rimuovi",
+        "generic_url_placeholder": "Inserisci l'URL completo (es. https://...)"
+      },
+      "job_form": {
+        "location": "Luogo di Lavoro",
+        "location_onsite": "In Sede",
+        "location_hybrid": "Ibrido",
+        "location_remote": "Da Remoto",
+        "salary": "Intervallo Salariale Annuo (USD)",
+        "workplace_tags": "Tag del Lavoro Ideale",
+        "timezone": "Fuso Orario Preferito",
+        "timezone_placeholder": "Seleziona una regione di fuso orario..."
+      },
+      "timezones": {
+        "americas": "Americhe",
+        "europe_africa": "Europa / Africa",
+        "asia": "Asia",
+        "oceania": "Oceania"
+      },
+      "api_error": {
+        "title": "Errore",
+        "message": "Impossibile salvare le impostazioni. Riprova più tardi.",
+        "close_button": "Chiudi"
+      },
+      "api_success": {
+        "title": "Successo!",
+        "message": "Le tue impostazioni sono state salvate con successo.",
+        "close_button": "Continua"
+      },
+      "tags": {
+        "good_culture": "Buona Cultura",
+        "growth_opportunities": "Opportunità di Crescita",
+        "innovative_culture": "Cultura Innovativa",
+        "diverse_team": "Team Eterogeneo",
+        "flexible_remote": "Remoto Flessibile",
+        "competitive_salary": "Salario Competitivo",
+        "high_impact_projects": "Progetti di Grande Impatto",
+        "cutting_edge_tech": "Tecnologia all'Avanguardia",
+        "autonomy": "Autonomia",
+        "health_benefits": "Benefici Sanitari",
+        "training": "Formazione Continua",
+        "collaborative_environment": "Ambiente Collaborativo"
+      }
+    },
+    "language_modal": {
+      "title": "Seleziona una Lingua",
+      "description": "Scegli la tua lingua preferita per l'applicazione."
+    },
+    "user_profile_modal": {
+      "title": "Profilo Utente",
+      "full_name": "Nome Completo",
+      "email": "Email",
+      "principal_id": "ID Principale",
+      "level": "Livello",
+      "balance": "Saldo",
+      "withdraw_button": "Ritira Premi",
+      "withdraw_title": "Ritira Premi",
+      "withdraw_exchange": "Vai all'Exchange",
+      "withdraw_p2p": "P2P Interno",
+      "stats_title": "Statistiche della Piattaforma",
+      "score": "Punteggio",
+      "experience": "Esperienza",
+      "total_playtime": "Tempo di Gioco Totale",
+      "last_played": "Ultima partita",
+      "sponsors_title": "Potenziali Sponsor"
+    }
+  }
+}

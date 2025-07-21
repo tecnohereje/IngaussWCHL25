@@ -1,0 +1,113 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "Anonym",
+      "wallet_identified": "Wir haben Ihre Wallet korrekt identifiziert.",
+      "not_available": "Nicht verfügbar"
+    },
+    "login": {
+      "welcome": "Willkommen bei Ingauss",
+      "prompt": "Bitte melden Sie sich an, um fortzufahren.",
+      "button": "Anmelden mit NFID",
+      "ii_button": "Anmelden mit Internet Identity",
+      "loading": "Wird geladen...",
+      "logo_alt": "Anwendungslogo",
+      "dev_mode_prompt": "Entwicklermodus: Authentifizierung deaktiviert.",
+      "dev_mode_button": "Direkt eintreten"
+    },
+    "profile": {
+      "username_placeholder": "Benutzername",
+      "logout_button": "Abmelden"
+    },
+    "dashboard": {
+      "settings_button": "Einstellungsbereich",
+      "testing_button": "Testbereich"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "tab_personal": "Persönliche Infos",
+      "tab_social": "Soziale Netzwerke",
+      "tab_job": "Job-Präferenzen",
+      "personal_form": {
+        "profile_pic": "Profilbild",
+        "cv_label": "Lebenslauf (PDF)",
+        "full_name": "Vollständiger Name",
+        "email": "E-Mail",
+        "bio": "Über mich",
+        "searching": "Aktiv auf Jobsuche?",
+        "share_contact": "Kontaktdaten mit Systemagenten teilen?",
+        "save_button": "Änderungen speichern",
+        "saving_button": "Speichern..."
+      },
+      "social_form": {
+        "network_name": "Netzwerkname",
+        "url": "URL",
+        "add_social": "Soziales Netzwerk hinzufügen",
+        "remove_social": "Entfernen",
+        "generic_url_placeholder": "Vollständige URL eingeben (z.B. https://...)"
+      },
+      "job_form": {
+        "location": "Arbeitsort",
+        "location_onsite": "Vor Ort",
+        "location_hybrid": "Hybrid",
+        "location_remote": "Remote",
+        "salary": "Jahresgehaltsspanne (USD)",
+        "workplace_tags": "Ideale Arbeitsplatz-Tags",
+        "timezone": "Bevorzugte Zeitzone",
+        "timezone_placeholder": "Wählen Sie eine Zeitzonenregion..."
+      },
+      "timezones": {
+        "americas": "Amerika",
+        "europe_africa": "Europa / Afrika",
+        "asia": "Asien",
+        "oceania": "Ozeanien"
+      },
+      "api_error": {
+        "title": "Fehler",
+        "message": "Einstellungen konnten nicht gespeichert werden. Bitte versuchen Sie es später erneut.",
+        "close_button": "Schließen"
+      },
+      "api_success": {
+        "title": "Erfolg!",
+        "message": "Ihre Einstellungen wurden erfolgreich gespeichert.",
+        "close_button": "Weiter"
+      },
+      "tags": {
+        "good_culture": "Gute Kultur",
+        "growth_opportunities": "Wachstumschancen",
+        "innovative_culture": "Innovative Kultur",
+        "diverse_team": "Vielfältiges Team",
+        "flexible_remote": "Flexibles Homeoffice",
+        "competitive_salary": "Wettbewerbsfähiges Gehalt",
+        "high_impact_projects": "Wirkungsvolle Projekte",
+        "cutting_edge_tech": "Spitzentechnologie",
+        "autonomy": "Autonomie",
+        "health_benefits": "Gesundheitsleistungen",
+        "training": "Kontinuierliche Weiterbildung",
+        "collaborative_environment": "Kollaboratives Umfeld"
+      }
+    },
+    "language_modal": {
+      "title": "Wähle eine Sprache",
+      "description": "Wählen Sie Ihre bevorzugte Sprache für die Anwendung."
+    },
+    "user_profile_modal": {
+      "title": "Benutzerprofil",
+      "full_name": "Vollständiger Name",
+      "email": "E-Mail",
+      "principal_id": "Principal ID",
+      "level": "Stufe",
+      "balance": "Guthaben",
+      "withdraw_button": "Belohnungen abheben",
+      "withdraw_title": "Belohnungen abheben",
+      "withdraw_exchange": "Zur Börse gehen",
+      "withdraw_p2p": "Internes P2P",
+      "stats_title": "Plattform-Statistiken",
+      "score": "Punktzahl",
+      "experience": "Erfahrung",
+      "total_playtime": "Gesamte Spielzeit",
+      "last_played": "Zuletzt gespielt",
+      "sponsors_title": "Potenzielle Sponsoren"
+    }
+  }
+}

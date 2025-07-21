@@ -1,0 +1,115 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "Anonymous",
+      "wallet_identified": "We've identified your wallet correctly.",
+      "not_available": "Not available"
+    },
+    "login": {
+      "welcome": "Welcome to Ingauss",
+      "prompt": "Please log in to continue.",
+      "button": "Login with NFID",
+      "ii_button": "Login with Internet Identity",
+      "loading": "Loading...",
+      "logo_alt": "Application Logo",
+      "dev_mode_prompt": "Development Mode: Authentication Disabled.",
+      "dev_mode_button": "Enter Directly"
+    },
+    "profile": {
+      "username_placeholder": "Username",
+      "logout_button": "Logout"
+    },
+    "dashboard": {
+      "settings_button": "Settings Zone",
+      "testing_button": "Testing Zone",
+      "settings_card_description": "Manage your profile, job preferences, and social links.",
+      "testing_card_description": "Access development tools and experimental features."
+    },
+    "settings": {
+      "title": "Settings",
+      "tab_personal": "Personal Info",
+      "tab_social": "Social Media",
+      "tab_job": "Job Preferences",
+      "personal_form": {
+        "profile_pic": "Profile Picture",
+        "cv_label": "CV (PDF)",
+        "full_name": "Full Name",
+        "email": "Email",
+        "bio": "About Me",
+        "searching": "Actively looking for a job?",
+        "share_contact": "Share contact info with system agents?",
+        "save_button": "Save Changes",
+        "saving_button": "Saving..."
+      },
+      "social_form": {
+        "network_name": "Network Name",
+        "url": "URL",
+        "add_social": "Add Social Network",
+        "remove_social": "Remove",
+        "generic_url_placeholder": "Enter full URL (e.g., https://...)"
+      },
+      "job_form": {
+        "location": "Work Location",
+        "location_onsite": "On-site",
+        "location_hybrid": "Hybrid",
+        "location_remote": "Remote",
+        "salary": "Annual Salary Range (USD)",
+        "workplace_tags": "Ideal Workplace Tags",
+        "timezone": "Preferred Time Zone",
+        "timezone_placeholder": "Select a time zone region..."
+      },
+      "timezones": {
+        "americas": "Americas",
+        "europe_africa": "Europe / Africa",
+        "asia": "Asia",
+        "oceania": "Oceania"
+      },
+      "api_error": {
+        "title": "Error",
+        "message": "Could not save settings. Please try again later.",
+        "close_button": "Close"
+      },
+      "api_success": {
+        "title": "Success!",
+        "message": "Your settings have been saved successfully.",
+        "close_button": "Continue"
+      },
+      "tags": {
+        "good_culture": "Good Culture",
+        "growth_opportunities": "Growth Opportunities",
+        "innovative_culture": "Innovative Culture",
+        "diverse_team": "Diverse Team",
+        "flexible_remote": "Flexible Remote",
+        "competitive_salary": "Competitive Salary",
+        "high_impact_projects": "High-impact Projects",
+        "cutting_edge_tech": "Cutting-edge Tech",
+        "autonomy": "Autonomy",
+        "health_benefits": "Health Benefits",
+        "training": "Continuous Training",
+        "collaborative_environment": "Collaborative Environment"
+      }
+    },
+    "language_modal": {
+      "title": "Select a Language",
+      "description": "Choose your preferred language for the application."
+    },
+    "user_profile_modal": {
+      "title": "User Profile",
+      "full_name": "Full Name",
+      "email": "Email",
+      "principal_id": "Principal ID",
+      "level": "Level",
+      "balance": "Balance",
+      "withdraw_button": "Withdraw Rewards",
+      "withdraw_title": "Withdraw Rewards",
+      "withdraw_exchange": "Go to Exchange",
+      "withdraw_p2p": "Internal P2P",
+      "stats_title": "Platform Stats",
+      "score": "Score",
+      "experience": "Experience",
+      "total_playtime": "Total Playtime",
+      "last_played": "Last Played",
+      "sponsors_title": "Potential Sponsors"
+    }
+  }
+}

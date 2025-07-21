@@ -1,0 +1,115 @@
+{
+  "translation": {
+    "common": {
+      "anonymous": "Anónimo",
+      "wallet_identified": "Identificamos tu wallet correctamente.",
+      "not_available": "No disponible"
+    },
+    "login": {
+      "welcome": "Bienvenido a Ingauss",
+      "prompt": "Por favor, inicia sesión para continuar.",
+      "button": "Iniciar Sesión con NFID",
+      "ii_button": "Iniciar Sesión con Internet Identity",
+      "loading": "Cargando...",
+      "logo_alt": "Logo de la Aplicación",
+      "dev_mode_prompt": "Modo Desarrollo: Autenticación Desactivada.",
+      "dev_mode_button": "Entrar Directamente"
+    },
+    "profile": {
+      "username_placeholder": "Nombre de Usuario",
+      "logout_button": "Cerrar Sesión"
+    },
+    "dashboard": {
+      "settings_button": "Zona de Configuración",
+      "testing_button": "Zona de Pruebas",
+      "settings_card_description": "Administra tu perfil, preferencias laborales y redes sociales.",
+      "testing_card_description": "Accede a herramientas de desarrollo y funciones experimentales."
+    },
+    "settings": {
+      "title": "Configuración",
+      "tab_personal": "Info Personal",
+      "tab_social": "Redes Sociales",
+      "tab_job": "Preferencias Laborales",
+      "personal_form": {
+        "profile_pic": "Foto de Perfil",
+        "cv_label": "CV (PDF)",
+        "full_name": "Nombre Completo",
+        "email": "Correo Electrónico",
+        "bio": "Acerca de Mí",
+        "searching": "¿En búsqueda activa de empleo?",
+        "share_contact": "¿Compartir datos de contacto con agentes del sistema?",
+        "save_button": "Guardar Cambios",
+        "saving_button": "Guardando..."
+      },
+      "social_form": {
+        "network_name": "Nombre de la Red",
+        "url": "URL",
+        "add_social": "Añadir Red Social",
+        "remove_social": "Eliminar",
+        "generic_url_placeholder": "Ingresa la URL completa (ej: https://...)"
+      },
+      "job_form": {
+        "location": "Ubicación del Trabajo",
+        "location_onsite": "Presencial",
+        "location_hybrid": "Híbrido",
+        "location_remote": "Remoto",
+        "salary": "Rango Salarial Anual (USD)",
+        "workplace_tags": "Etiquetas del Trabajo Ideal",
+        "timezone": "Zona Horaria Preferida",
+        "timezone_placeholder": "Selecciona una región horaria..."
+      },
+      "timezones": {
+        "americas": "América",
+        "europe_africa": "Europa / África",
+        "asia": "Asia",
+        "oceania": "Oceanía"
+      },
+      "api_error": {
+        "title": "Error",
+        "message": "No se pudieron guardar los cambios. Por favor, inténtalo de nuevo más tarde.",
+        "close_button": "Cerrar"
+      },
+      "api_success": {
+        "title": "¡Éxito!",
+        "message": "Tu configuración se ha guardado correctamente.",
+        "close_button": "Continuar"
+      },
+      "tags": {
+        "good_culture": "Buena Cultura",
+        "growth_opportunities": "Oportunidades de Crecimiento",
+        "innovative_culture": "Cultura Innovadora",
+        "diverse_team": "Equipo Diverso",
+        "flexible_remote": "Remoto Flexible",
+        "competitive_salary": "Salario Competitivo",
+        "high_impact_projects": "Proyectos de Alto Impacto",
+        "cutting_edge_tech": "Tecnología de Punta",
+        "autonomy": "Autonomía",
+        "health_benefits": "Beneficios de Salud",
+        "training": "Capacitación Continua",
+        "collaborative_environment": "Entorno Colaborativo"
+      }
+    },
+    "language_modal": {
+      "title": "Selecciona un Idioma",
+      "description": "Elige tu idioma de preferencia para la aplicación."
+    },
+    "user_profile_modal": {
+      "title": "Perfil de Usuario",
+      "full_name": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "principal_id": "ID Principal",
+      "level": "Nivel",
+      "balance": "Saldo",
+      "withdraw_button": "Retirar Recompensas",
+      "withdraw_title": "Retirar Recompensas",
+      "withdraw_exchange": "Ir a Exchange",
+      "withdraw_p2p": "P2P Interno",
+      "stats_title": "Estadísticas de la Plataforma",
+      "score": "Puntaje",
+      "experience": "Experiencia",
+      "total_playtime": "Tiempo Total de Juego",
+      "last_played": "Última vez jugado",
+      "sponsors_title": "Potenciales Patrocinadores"
+    }
+  }
+}

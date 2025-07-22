@@ -7,16 +7,18 @@ import ThemeSwitch from './ThemeSwitch';
 import UserProfileModal from './modals/UserProfileModal';
 import WithdrawModal from './modals/WithdrawModal';
 import Skeleton from './ui/Skeleton';
+import Marquee from './ui/Marquee';
 import { ArrowLeft, LogOut } from 'lucide-react';
 import { Box, Flex, Text, IconButton, Avatar } from '@radix-ui/themes';
-import { headerLogoUrl, 
-        isMarqueeEnabled, 
-        marqueeDefaultText, 
-        isLanguageSelectorEnabled, 
-        isThemeSwitchEnabled, 
-        isUserProfileEnabled } from '../config/features';
+import { 
+  isLanguageSelectorEnabled, 
+  isThemeSwitchEnabled, 
+  isUserProfileEnabled,
+  isMarqueeEnabled,
+  headerLogoUrl,
+  marqueeDefaultText
+} from '../config/features';
 import { fetchMarqueeTexts } from '../api/mockApi';
-import Marquee from './ui/Marquee';
 
 const Header: React.FC = () => {
   const { userProfile, isProfileLoading, logout } = useAuth();
@@ -47,6 +49,11 @@ const Header: React.FC = () => {
   const handleWithdrawClick = () => {
     setIsProfileOpen(false);
     setIsWithdrawOpen(true);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/', { replace: true });
   };
 
   return (
@@ -102,7 +109,7 @@ const Header: React.FC = () => {
                 </button>
               )}
 
-              <IconButton variant="soft" color="red" onClick={logout} title={t('profile.logout_button')}>
+              <IconButton variant="soft" color="red" onClick={handleLogout} title={t('profile.logout_button')}>
                 <LogOut size={16} />
               </IconButton>
             </Flex>

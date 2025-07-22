@@ -1,74 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flex, Text, TextField, Button, IconButton } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { Plus, Trash2, Linkedin, Github, Instagram, Twitter, Link as LinkIcon } from 'lucide-react';
-import { saveUserAccount, loadUserAccount } from '../../api/mockApi';
+import { saveUserAccount } from '../../api/mockApi';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
+import { TabComponentProps } from '../../pages/SettingsPage';
 
-interface SocialLink {
-  id: number;
-  url: string;
-}
-
-interface SocialFormData {
-  linkedin: string;
-  github: string;
-  instagram: string;
-  x: string;
-  additional: SocialLink[];
-}
-
-const SocialMediaTab: React.FC = () => {
+const SocialMediaTab: React.FC<TabComponentProps> = ({ formData, setFormData }) => {
   const { t } = useTranslation();
   const { principal } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<SocialFormData>({
-    linkedin: '',
-    github: '',
-    instagram: '',
-    x: '',
-    additional: [],
-  });
-  
-  useEffect(() => {
-    const loadData = async () => {
-      if (!principal) return;
-      const account = await loadUserAccount(principal);
-      if (account?.social) {
-        setFormData(account.social);
-      }
-    };
-    loadData();
-  }, [principal]);
+
+  const socialData = formData.social || { linkedin: '', github: '', instagram: '', x: '', additional: [] };
+
+  const updateSocialData = (updateFn: (currentSocial: typeof socialData) => typeof socialData) => {
+    setFormData(prev => ({
+      ...prev,
+      social: updateFn(prev.social || socialData),
+    }));
+  };
 
   const handleStaticChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    updateSocialData(currentSocial => ({ ...currentSocial, [name]: value }));
   };
 
   const handleAdditionalChange = (id: number, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      additional: prev.additional.map(item =>
+    updateSocialData(currentSocial => ({
+      ...currentSocial,
+      additional: (currentSocial.additional || []).map(item =>
         item.id === id ? { ...item, url: value } : item
-      )
+      ),
     }));
   };
 
   const addSocialField = (): void => {
     const newId = Date.now();
-    setFormData(prev => ({
-      ...prev,
-      additional: [...prev.additional, { id: newId, url: '' }]
+    updateSocialData(currentSocial => ({
+      ...currentSocial,
+      additional: [...(currentSocial.additional || []), { id: newId, url: '' }],
     }));
   };
 
   const removeSocialField = (id: number): void => {
-    setFormData(prev => ({
-      ...prev,
-      additional: prev.additional.filter(item => item.id !== id)
+    updateSocialData(currentSocial => ({
+      ...currentSocial,
+      additional: (currentSocial.additional || []).filter(item => item.id !== id),
     }));
   };
   
@@ -80,7 +59,7 @@ const SocialMediaTab: React.FC = () => {
     }
     setIsLoading(true);
     try {
-      await saveUserAccount(principal, { social: formData });
+      await saveUserAccount(principal, { social: socialData });
       toast.success(t('settings.api_success.message'));
     } catch (error) {
       toast.error(t('settings.api_error.message'));
@@ -105,7 +84,7 @@ const SocialMediaTab: React.FC = () => {
               <Flex direction="column" gap="1">
                 <Form.Label asChild><Text size="2" weight="bold">{field.name.charAt(0).toUpperCase() + field.name.slice(1)}</Text></Form.Label>
                 <Form.Control asChild>
-                  <TextField.Root name={field.name} type="url" value={formData[field.name]} onChange={handleStaticChange}>
+                  <TextField.Root name={field.name} type="url" value={socialData[field.name]} onChange={handleStaticChange}>
                     <TextField.Slot>{field.icon}</TextField.Slot>
                   </TextField.Root>
                 </Form.Control>
@@ -115,7 +94,7 @@ const SocialMediaTab: React.FC = () => {
           </Form.Field>
         ))}
         
-        {formData.additional.map((item, index) => (
+        {socialData.additional.map((item, index) => (
           <Flex key={item.id} gap="2" align="end">
             <Form.Field name={`additional-url-${item.id}`} asChild style={{ flexGrow: 1 }}>
               <label>
@@ -151,5 +130,4 @@ const SocialMediaTab: React.FC = () => {
     </Form.Root>
   );
 };
-
 export default SocialMediaTab;

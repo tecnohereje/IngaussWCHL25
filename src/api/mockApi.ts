@@ -38,13 +38,13 @@ export interface EnrichedProfile {
 
 // --- FUNCIONES DE PERSISTENCIA LOCAL ---
 
-const LOCAL_STORAGE_KEY = 'ingauss-user-account';
+const getStorageKey = (principal: Principal): string => `ingauss-user-account-${principal.toText()}`;
 
-export const loadUserAccount = (): Promise<UserAccount | null> => {
-  console.log(`[Persistence: local] Loading user account from localStorage.`);
+export const loadUserAccount = (principal: Principal): Promise<UserAccount | null> => {
+  console.log(`[Persistence: local] Loading user account for ${principal.toText()}`);
   return new Promise(resolve => {
     setTimeout(() => {
-      const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const data = localStorage.getItem(getStorageKey(principal));
       if (data) {
         const parsed = JSON.parse(data);
         if (parsed.personal) {
@@ -59,15 +59,15 @@ export const loadUserAccount = (): Promise<UserAccount | null> => {
   });
 };
 
-export const saveUserAccount = (partialAccount: Partial<UserAccount>): Promise<void> => {
-  console.log(`[Persistence: local] Saving user account to localStorage.`);
+export const saveUserAccount = (principal: Principal, partialAccount: Partial<UserAccount>): Promise<void> => {
+  console.log(`[Persistence: local] Saving user account for ${principal.toText()}`);
   return new Promise(async resolve => {
     const defaultAccount: Partial<UserAccount> = {
       personal: { profilePic: null, fullName: '', email: '', bio: '', cv: null, isSearching: false, shareContactInfo: true },
       social: { linkedin: '', github: '', instagram: '', x: '', additional: [] },
       job: { locations: [], salaryRange: [0, 0], tags: [], preferredTimezone: '' }
     };
-    const existingAccount = await loadUserAccount() || defaultAccount;
+    const existingAccount = await loadUserAccount(principal) || defaultAccount;
     
     const newAccountData: UserAccount = {
       personal: { ...existingAccount.personal, ...partialAccount.personal } as UserAccount['personal'],
@@ -81,7 +81,7 @@ export const saveUserAccount = (partialAccount: Partial<UserAccount>): Promise<v
         delete (dataToStore.personal as any).cv;
     }
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToStore));
+    localStorage.setItem(getStorageKey(principal), JSON.stringify(dataToStore));
     setTimeout(resolve, 500);
   });
 };
@@ -101,11 +101,9 @@ export const fetchMarqueeTexts = (): Promise<string[]> => {
 
 export const fetchEnrichedProfile = async (principal: Principal): Promise<EnrichedProfile> => {
   console.log("Fetching enriched profile for:", principal.toText());
-  const userAccount = await loadUserAccount();
+  const userAccount = await loadUserAccount(principal);
 
-  // Simulación: A veces el usuario tiene un perfil completo, a veces solo lo básico.
   if (Math.random() > 0.5) {
-    // Perfil completo
     const fullProfile: EnrichedProfile = {
       fullName: userAccount?.personal?.fullName || "Satoshi Nakamoto",
       email: userAccount?.personal?.email || "satoshi@gmx.com",
@@ -117,7 +115,6 @@ export const fetchEnrichedProfile = async (principal: Principal): Promise<Enrich
     };
     return new Promise(resolve => setTimeout(() => resolve(fullProfile), 1000));
   } else {
-    // Perfil parcial (nuevo usuario)
     console.log("Simulating a new user with partial profile data.");
     const partialProfile: EnrichedProfile = {
       fullName: userAccount?.personal?.fullName,

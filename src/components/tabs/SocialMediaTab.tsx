@@ -95,6 +95,10 @@ const SocialMediaTab: React.FC = () => {
                     <TextField.Slot>{field.icon}</TextField.Slot>
                   </TextField.Root>
                 </Form.Control>
+                {/* --- MENSAJE DE VALIDACIÓN AÑADIDO --- */}
+                <Form.Message className="form-message" match="typeMismatch">
+                  {t('form_validation.type_mismatch_url')}
+                </Form.Message>
               </Flex>
             </label>
           </Form.Field>
@@ -111,6 +115,10 @@ const SocialMediaTab: React.FC = () => {
                       <TextField.Slot><LinkIcon size={16} /></TextField.Slot>
                     </TextField.Root>
                   </Form.Control>
+                   {/* --- MENSAJE DE VALIDACIÓN AÑADIDO --- */}
+                  <Form.Message className="form-message" match="typeMismatch">
+                    {t('form_validation.type_mismatch_url')}
+                  </Form.Message>
                 </Flex>
               </label>
             </Form.Field>

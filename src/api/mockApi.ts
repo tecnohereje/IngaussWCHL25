@@ -1,7 +1,6 @@
 import { Principal } from "@dfinity/principal";
 
 // --- MODELO DE DATOS / JSON PARA EL CANISTER ---
-// Este es el "contrato de datos" que define la estructura completa del perfil de un usuario.
 export interface UserAccount {
   personal: {
     profilePic: File | null;
@@ -41,7 +40,6 @@ export interface EnrichedProfile {
 
 const LOCAL_STORAGE_KEY = 'ingauss-user-account';
 
-// Carga la cuenta de usuario completa desde el localStorage.
 export const loadUserAccount = (): Promise<UserAccount | null> => {
   console.log(`[Persistence: local] Loading user account from localStorage.`);
   return new Promise(resolve => {
@@ -49,7 +47,6 @@ export const loadUserAccount = (): Promise<UserAccount | null> => {
       const data = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (data) {
         const parsed = JSON.parse(data);
-        // Omitimos los archivos al cargar, ya que no se pueden serializar en JSON
         if (parsed.personal) {
             parsed.personal.profilePic = null;
             parsed.personal.cv = null;
@@ -62,7 +59,6 @@ export const loadUserAccount = (): Promise<UserAccount | null> => {
   });
 };
 
-// Guarda una parte de la cuenta de usuario, fusionándola con los datos existentes.
 export const saveUserAccount = (partialAccount: Partial<UserAccount>): Promise<void> => {
   console.log(`[Persistence: local] Saving user account to localStorage.`);
   return new Promise(async resolve => {
@@ -71,17 +67,14 @@ export const saveUserAccount = (partialAccount: Partial<UserAccount>): Promise<v
       social: { linkedin: '', github: '', instagram: '', x: '', additional: [] },
       job: { locations: [], salaryRange: [0, 0], tags: [], preferredTimezone: '' }
     };
-
     const existingAccount = await loadUserAccount() || defaultAccount;
     
-    // Fusiona los datos viejos con los nuevos de forma segura
     const newAccountData: UserAccount = {
       personal: { ...existingAccount.personal, ...partialAccount.personal } as UserAccount['personal'],
       social: { ...existingAccount.social, ...partialAccount.social } as UserAccount['social'],
       job: { ...existingAccount.job, ...partialAccount.job } as UserAccount['job'],
     };
 
-    // No guardamos los objetos de archivo en localStorage
     const dataToStore = { ...newAccountData };
     if (dataToStore.personal) {
         delete (dataToStore.personal as any).profilePic;
@@ -106,31 +99,32 @@ export const fetchMarqueeTexts = (): Promise<string[]> => {
   return new Promise(resolve => setTimeout(() => resolve(mockTexts), 2000));
 };
 
-export const fetchEnrichedProfile = (principal: Principal): Promise<EnrichedProfile> => {
-  console.log("Fetching enriched profile from our backend for:", principal.toText());
+export const fetchEnrichedProfile = async (principal: Principal): Promise<EnrichedProfile> => {
+  console.log("Fetching enriched profile for:", principal.toText());
+  const userAccount = await loadUserAccount();
 
+  // Simulación: A veces el usuario tiene un perfil completo, a veces solo lo básico.
   if (Math.random() > 0.5) {
-    const mockProfile: EnrichedProfile = {
-      fullName: "Satoshi Nakamoto",
-      email: "satoshi@gmx.com",
-      linkedin: "/in/satoshi",
+    // Perfil completo
+    const fullProfile: EnrichedProfile = {
+      fullName: userAccount?.personal?.fullName || "Satoshi Nakamoto",
+      email: userAccount?.personal?.email || "satoshi@gmx.com",
+      linkedin: userAccount?.social?.linkedin,
       level: 12,
       balances: { icp: 10.45, rbtc: 0.005, eth: 0.12 },
-      stats: {
-        score: 1250,
-        experience: 85,
-        totalPlaytime: "48h",
-        lastPlayed: new Date().toLocaleDateString(),
-      },
+      stats: { score: 1250, experience: 85, totalPlaytime: "48h", lastPlayed: new Date().toLocaleDateString() },
       sponsors: ['google', 'apple', 'microsoft', 'amazon', 'meta'],
     };
-    return new Promise(resolve => setTimeout(() => resolve(mockProfile), 1500));
+    return new Promise(resolve => setTimeout(() => resolve(fullProfile), 1000));
   } else {
+    // Perfil parcial (nuevo usuario)
     console.log("Simulating a new user with partial profile data.");
     const partialProfile: EnrichedProfile = {
-        fullName: "New User",
-        balances: { icp: 0, rbtc: 0, eth: 0 }
+      fullName: userAccount?.personal?.fullName,
+      email: userAccount?.personal?.email,
+      linkedin: userAccount?.social?.linkedin,
+      balances: { icp: 0, rbtc: 0, eth: 0 }
     };
-    return new Promise(resolve => setTimeout(() => resolve(partialProfile), 1500));
+    return new Promise(resolve => setTimeout(() => resolve(partialProfile), 1000));
   }
 };

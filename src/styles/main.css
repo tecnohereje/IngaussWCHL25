@@ -393,6 +393,14 @@ main.content-area:has(.settings-page) {
   clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
 }
 
+/* --- ESTILOS PARA MENSAJES DE VALIDACIÓN DE FORMULARIO --- */
+.form-message {
+  font-size: 13px;
+  font-weight: 500; /* Hacemos el texto un poco más grueso */
+  color: var(--red-11); /* Usamos el color rojo de la paleta de Radix */
+  margin-top: 5px;
+}
+
 @media (min-width: 768px) {
   .user-text-details-header {
     display: block;

@@ -16,11 +16,10 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onClose, on
   const { t } = useTranslation();
   const { principal, userProfile, isProfileLoading } = useAuth();
   
-  const notAvailable: string = "n/a"; // Usamos "n/a" como fallback
+  const notAvailable: string = "n/a";
   const displayName: string = userProfile?.fullName || t('common.anonymous');
   const avatarFallback: string = displayName.charAt(0).toUpperCase();
-
-  // --- Lógica para deshabilitar el botón ---
+  
   const balances = userProfile?.balances;
   const totalBalance = (balances?.icp || 0) + (balances?.rbtc || 0) + (balances?.eth || 0);
   const isWithdrawDisabled = isProfileLoading || totalBalance <= 0;
@@ -47,7 +46,7 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onClose, on
             <Card mt="5">
                 <Flex direction="column" align="center" gap="1">
                     <Text size="1" color="gray">{t('user_profile_modal.level')}</Text>
-                    <Flex align="center" gap="1"><Award size={16}/><Heading size="4">{userProfile?.level || notAvailable}</Heading></Flex>
+                    <Flex align="center" gap="1"><Award size={16}/><Heading size="4">{userProfile?.level ?? notAvailable}</Heading></Flex>
                 </Flex>
             </Card>
 
@@ -60,7 +59,7 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onClose, on
             <Card mt="4">
               <Heading size="3" mb="2">{t('user_profile_modal.stats_title')}</Heading>
               <Grid columns={{initial: '1', sm: '2'}} gap="2">
-                <Text size="2">{t('user_profile_modal.score')}: <strong>{userProfile?.stats?.score || notAvailable}</strong></Text>
+                <Text size="2">{t('user_profile_modal.score')}: <strong>{userProfile?.stats?.score ?? notAvailable}</strong></Text>
                 <Text size="2">{t('user_profile_modal.experience')}: <strong>{userProfile?.stats?.experience ? `${userProfile.stats.experience}%` : notAvailable}</strong></Text>
                 <Text size="2">{t('user_profile_modal.total_playtime')}: <strong>{userProfile?.stats?.totalPlaytime || notAvailable}</strong></Text>
                 <Text size="2">{t('user_profile_modal.last_played')}: <strong>{userProfile?.stats?.lastPlayed || notAvailable}</strong></Text>
@@ -90,7 +89,6 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onClose, on
 
 
 const UserProfileSkeleton = () => (
-  // ... (El componente Skeleton no necesita cambios)
   <Flex direction="column" gap="4">
     <Flex direction="column" align="center" gap="2">
       <Skeleton style={{ width: '80px', height: '80px', borderRadius: '50%' }} />

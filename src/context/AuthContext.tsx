@@ -3,19 +3,10 @@ import { AuthClient } from '@dfinity/auth-client';
 import { Identity } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
 import { iiDerivationOrigin, loginLogoUrl } from '../config/features';
+import { fetchEnrichedProfile, EnrichedProfile } from '../api/mockApi'; // Importar tipos y función
 
-// --- Interfaces y tipos (sin cambios) ---
-interface UserProfile {
-  fullName: string;
-  email: string;
-  linkedin: string;
-  level: number;
-  balances: {
-    icp: number;
-    rbtc: number;
-    eth: number;
-  };
-}
+// --- Se usa la interfaz importada ---
+type UserProfile = EnrichedProfile;
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -30,25 +21,11 @@ interface AuthContextType {
   bypassLogin: () => void;
 }
 
-interface AuthProviderProps {
-  children: React.ReactNode;
-}
+// ... (El resto del archivo AuthContext.tsx no cambia)
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const fetchUserProfile = (principal: Principal): Promise<UserProfile> => {
-  console.log("Fetching profile for principal:", principal.toText());
-  const mockProfile: UserProfile = {
-    fullName: "Satoshi Nakamoto",
-    email: "satoshi@gmx.com",
-    linkedin: "/in/satoshi",
-    level: 12,
-    balances: { icp: 10.45, rbtc: 0.005, eth: 0.12 },
-  };
-  return new Promise(resolve => setTimeout(() => resolve(mockProfile), 1500));
-};
-
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [authClient, setAuthClient] = useState<AuthClient | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
@@ -74,7 +51,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initAuth();
   }, []);
 
-  // --- REFACTOR: Las funciones de login ahora devuelven una Promesa ---
   const handleLogin = (options: any): Promise<void> => {
     return new Promise(async (resolve, reject) => {
       if (!authClient) {
@@ -86,14 +62,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           try {
             const userIdentity = authClient.getIdentity();
             await handleAuthenticated(userIdentity);
-            resolve(); // El login fue exitoso
+            resolve();
           } catch (e) {
             reject(e);
           }
         },
         onError: (err) => {
           console.error("Login Error:", err);
-          reject(err); // El login falló
+          reject(err);
         },
       });
     });
@@ -126,14 +102,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const handleAuthenticated = async (userIdentity: Identity): Promise<void> => {
-    setIsProfileLoading(true);
     const userPrincipal = userIdentity.getPrincipal();
-    const profile = await fetchUserProfile(userPrincipal);
     setIdentity(userIdentity);
     setPrincipal(userPrincipal);
-    setUserProfile(profile);
     setIsAuthenticated(true);
-    setIsProfileLoading(false);
+    
+    setIsProfileLoading(true);
+    try {
+      const profile = await fetchEnrichedProfile(userPrincipal);
+      setUserProfile(profile);
+    } catch (error) {
+      console.error("Failed to fetch enriched profile:", error);
+      setUserProfile(null);
+    } finally {
+      setIsProfileLoading(false);
+    }
   };
 
   const bypassLogin = (): void => {
@@ -145,6 +128,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       linkedin: "",
       level: 99,
       balances: { icp: 123, rbtc: 0.1, eth: 2.5 },
+      stats: {
+        score: 2500,
+        experience: 95,
+        totalPlaytime: "120h",
+        lastPlayed: new Date().toLocaleDateString(),
+      },
+      sponsors: ['google', 'apple']
     };
     setIdentity(null);
     setPrincipal(mockPrincipal);

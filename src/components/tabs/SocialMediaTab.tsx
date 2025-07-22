@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flex, Text, TextField, Button, IconButton } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { Plus, Trash2, Linkedin, Github, Instagram, Twitter, Link as LinkIcon } from 'lucide-react';
-import { submitSettings } from '../../api/mockApi';
+import { saveUserAccount, loadUserAccount } from '../../api/mockApi';
 import toast from 'react-hot-toast';
 
 interface SocialLink {
@@ -30,6 +30,16 @@ const SocialMediaTab: React.FC = () => {
     x: '',
     additional: [],
   });
+  
+  useEffect(() => {
+    const loadData = async () => {
+      const account = await loadUserAccount();
+      if (account?.social) {
+        setFormData(account.social);
+      }
+    };
+    loadData();
+  }, []);
 
   const handleStaticChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -56,7 +66,7 @@ const SocialMediaTab: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await submitSettings({ social: formData });
+      await saveUserAccount({ social: formData });
       toast.success(t('settings.api_success.message'));
     } catch (error) {
       toast.error(t('settings.api_error.message'));
@@ -78,14 +88,14 @@ const SocialMediaTab: React.FC = () => {
         {staticFields.map(field => (
           <Form.Field key={field.name} name={field.name} asChild>
             <label>
-            <Flex direction="column" gap="1">
-              <Form.Label asChild><Text size="2" weight="bold">{field.name.charAt(0).toUpperCase() + field.name.slice(1)}</Text></Form.Label>
-              <Form.Control asChild>
-                <TextField.Root name={field.name} type="url" value={formData[field.name]} onChange={handleStaticChange}>
-                  <TextField.Slot>{field.icon}</TextField.Slot>
-                </TextField.Root>
-              </Form.Control>
-            </Flex>
+              <Flex direction="column" gap="1">
+                <Form.Label asChild><Text size="2" weight="bold">{field.name.charAt(0).toUpperCase() + field.name.slice(1)}</Text></Form.Label>
+                <Form.Control asChild>
+                  <TextField.Root name={field.name} type="url" value={formData[field.name]} onChange={handleStaticChange}>
+                    <TextField.Slot>{field.icon}</TextField.Slot>
+                  </TextField.Root>
+                </Form.Control>
+              </Flex>
             </label>
           </Form.Field>
         ))}
@@ -94,14 +104,14 @@ const SocialMediaTab: React.FC = () => {
           <Flex key={item.id} gap="2" align="end">
             <Form.Field name={`additional-url-${item.id}`} asChild style={{ flexGrow: 1 }}>
               <label>
-              <Flex direction="column" gap="1">
-                <Form.Label asChild><Text size="2" weight="bold">{`${t('settings.social_form.url')} #${index + 1}`}</Text></Form.Label>
-                <Form.Control asChild>
-                  <TextField.Root type="url" value={item.url} onChange={(e) => handleAdditionalChange(item.id, e.target.value)} placeholder={t('settings.social_form.generic_url_placeholder')}>
-                    <TextField.Slot><LinkIcon size={16} /></TextField.Slot>
-                  </TextField.Root>
-                </Form.Control>
-              </Flex>
+                <Flex direction="column" gap="1">
+                  <Form.Label asChild><Text size="2" weight="bold">{`${t('settings.social_form.url')} #${index + 1}`}</Text></Form.Label>
+                  <Form.Control asChild>
+                    <TextField.Root type="url" value={item.url} onChange={(e) => handleAdditionalChange(item.id, e.target.value)} placeholder={t('settings.social_form.generic_url_placeholder')}>
+                      <TextField.Slot><LinkIcon size={16} /></TextField.Slot>
+                    </TextField.Root>
+                  </Form.Control>
+                </Flex>
               </label>
             </Form.Field>
             <IconButton color="red" variant="soft" onClick={() => removeSocialField(item.id)} type="button">

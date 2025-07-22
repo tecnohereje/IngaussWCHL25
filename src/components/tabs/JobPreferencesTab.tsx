@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flex, Text, Button, Badge } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
@@ -7,7 +7,7 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import TimeZoneModal from '../modals/TimeZoneModal';
 import { ChevronDown } from 'lucide-react';
 import { salaryRange, workplaceTags, maxWorkplaceTags } from '../../config/features';
-import { submitSettings } from '../../api/mockApi';
+import { saveUserAccount, loadUserAccount } from '../../api/mockApi';
 import toast from 'react-hot-toast';
 
 interface TagSelectorProps {
@@ -62,6 +62,16 @@ const JobPreferencesTab: React.FC = () => {
     preferredTimezone: ''
   });
 
+  useEffect(() => {
+    const loadData = async () => {
+      const account = await loadUserAccount();
+      if (account?.job) {
+        setFormData(account.job);
+      }
+    };
+    loadData();
+  }, []);
+
   const handleLocationChange = (newLocations: string[]): void => {
     setFormData(prev => ({ ...prev, locations: newLocations }));
   };
@@ -82,7 +92,7 @@ const JobPreferencesTab: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await submitSettings({ job: formData });
+      await saveUserAccount({ job: formData });
       toast.success(t('settings.api_success.message'));
     } catch (error) {
       toast.error(t('settings.api_error.message'));
@@ -105,7 +115,6 @@ const JobPreferencesTab: React.FC = () => {
           <Form.Field name="locations" asChild>
             <Flex direction="column" gap="1">
               <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.location')}</Text></Form.Label>
-              
               <ToggleGroup.Root 
                 type="multiple" 
                 className="tag-selector" 
@@ -152,16 +161,16 @@ const JobPreferencesTab: React.FC = () => {
           </Form.Field>
 
           <Form.Field name="timezone" asChild>
-            <label>  
-            <Flex direction="column" gap="1">
-              <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.timezone')}</Text></Form.Label>
-              <Button variant="soft" onClick={() => setIsTimezoneModalOpen(true)} type="button">
-                  <Text>
-                    {formData.preferredTimezone || t('settings.job_form.timezone_placeholder')}
-                  </Text>
-                  <ChevronDown />
-              </Button>
-            </Flex>
+            <label>
+              <Flex direction="column" gap="1">
+                <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.timezone')}</Text></Form.Label>
+                <Button variant="soft" onClick={() => setIsTimezoneModalOpen(true)} type="button">
+                    <Text>
+                      {formData.preferredTimezone || t('settings.job_form.timezone_placeholder')}
+                    </Text>
+                    <ChevronDown />
+                </Button>
+              </Flex>
             </label>
           </Form.Field>
 

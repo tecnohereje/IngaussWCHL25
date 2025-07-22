@@ -1,26 +1,49 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flex, Text, TextField, TextArea, Switch, Button, Avatar, Card, Box } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { Paperclip, FileText } from 'lucide-react';
 import { maxProfilePicSize, maxResumeSize } from '../../config/features';
-import { submitSettings } from '../../api/mockApi';
+import { saveUserAccount, loadUserAccount } from '../../api/mockApi';
 import toast from 'react-hot-toast';
+
+interface PersonalFormData {
+  profilePic: File | null;
+  fullName: string;
+  email: string;
+  bio: string;
+  cv: File | null;
+  isSearching: boolean;
+  shareContactInfo: boolean;
+}
 
 const PersonalInfoTab: React.FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [profilePreview, setProfilePreview] = useState<string | null>(null);
   
-  const [formData, setFormData] = useState({
-    profilePic: null as File | null,
+  const [formData, setFormData] = useState<PersonalFormData>({
+    profilePic: null,
     fullName: '',
     email: '',
     bio: '',
-    cv: null as File | null,
+    cv: null,
     isSearching: false,
     shareContactInfo: true,
   });
+
+  useEffect(() => {
+    const loadData = async () => {
+      const account = await loadUserAccount();
+      if (account?.personal) {
+        setFormData(prev => ({
+          ...prev,
+          ...account.personal,
+        }));
+      }
+    };
+    loadData();
+  }, []);
 
   const profileInputRef = useRef<HTMLInputElement>(null);
   const resumeInputRef = useRef<HTMLInputElement>(null);
@@ -69,12 +92,12 @@ const PersonalInfoTab: React.FC = () => {
       if (fileType === 'profilePic') setProfilePreview(null);
     }
   };
-
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await submitSettings({ personal: formData });
+      await saveUserAccount({ personal: formData });
       toast.success(t('settings.api_success.message'));
     } catch (error) {
       toast.error(t('settings.api_error.message'));
@@ -88,19 +111,19 @@ const PersonalInfoTab: React.FC = () => {
       <Flex direction="column" gap="4" width="100%">
         <Form.Field name="fullName" asChild>
           <label>
-          <Flex direction="column" gap="1">
-            <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.full_name')}</Text></Form.Label>
-            <Form.Control asChild><TextField.Root name="fullName" value={formData.fullName} onChange={handleChange} /></Form.Control>
-          </Flex>
+            <Flex direction="column" gap="1">
+              <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.full_name')}</Text></Form.Label>
+              <Form.Control asChild><TextField.Root name="fullName" value={formData.fullName} onChange={handleChange} /></Form.Control>
+            </Flex>
           </label>
         </Form.Field>
-      
+        
         <Form.Field name="email" asChild>
           <label>
-          <Flex direction="column" gap="1">
-            <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.email')}</Text></Form.Label>
-            <Form.Control asChild><TextField.Root name="email" type="email" value={formData.email} onChange={handleChange} /></Form.Control>
-          </Flex>
+            <Flex direction="column" gap="1">
+              <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.email')}</Text></Form.Label>
+              <Form.Control asChild><TextField.Root name="email" type="email" value={formData.email} onChange={handleChange} /></Form.Control>
+            </Flex>
           </label>
         </Form.Field>
 
@@ -151,20 +174,26 @@ const PersonalInfoTab: React.FC = () => {
         
         <Form.Field name="bio" asChild>
           <label>
-          <Flex direction="column" gap="1">
-            <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.bio')}</Text></Form.Label>
-            <Form.Control asChild><TextArea name="bio" value={formData.bio} onChange={handleChange} style={{height: 100}}/></Form.Control>
-          </Flex>
+            <Flex direction="column" gap="1">
+              <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.bio')}</Text></Form.Label>
+              <Form.Control asChild><TextArea name="bio" value={formData.bio} onChange={handleChange} style={{height: 100}}/></Form.Control>
+            </Flex>
           </label>
         </Form.Field>
         
-        <Form.Field name="isSearching" asChild>
-            <Text as="label" size="2"><Flex gap="2" align="center"><Switch checked={formData.isSearching} onCheckedChange={(checked) => handleSwitchChange(checked, 'isSearching')} /> {t('settings.personal_form.searching')}</Flex></Text>
-        </Form.Field>
+        <Text as="label" size="2">
+          <Flex gap="2" align="center">
+            <Switch checked={formData.isSearching} onCheckedChange={(checked) => handleSwitchChange(checked, 'isSearching')} /> 
+            {t('settings.personal_form.searching')}
+          </Flex>
+        </Text>
 
-        <Form.Field name="shareContactInfo" asChild>
-            <Text as="label" size="2"><Flex gap="2" align="center"><Switch checked={formData.shareContactInfo} onCheckedChange={(checked) => handleSwitchChange(checked, 'shareContactInfo')} /> {t('settings.personal_form.share_contact')}</Flex></Text>
-        </Form.Field>
+        <Text as="label" size="2">
+          <Flex gap="2" align="center">
+            <Switch checked={formData.shareContactInfo} onCheckedChange={(checked) => handleSwitchChange(checked, 'shareContactInfo')} /> 
+            {t('settings.personal_form.share_contact')}
+          </Flex>
+        </Text>
 
         <Flex mt="4" justify="end">
           <Form.Submit asChild>
@@ -177,5 +206,4 @@ const PersonalInfoTab: React.FC = () => {
     </Form.Root>
   );
 };
-
 export default PersonalInfoTab;

@@ -28,5 +28,10 @@ export const maxWorkplaceTags: number = parseInt(import.meta.env.VITE_MAX_WORKPL
 // --- APP CONFIGURATION ---
 export const loginLogoUrl: string = import.meta.env.VITE_APP_LOGIN_LOGO_URL || '/img/IngaussLogoSol.webp';
 export const iiDerivationOrigin: string = import.meta.env.VITE_II_DERIVATION_ORIGIN || 'http://localhost:5173';
-export const headerLogoUrl: string = import.meta.env.VITE_HEADER_LOGO_URL || '/img/IngaussLogoHeader.png';
+export const headerLogoUrl: string = import.meta.env.VITE_HEADER_LOGO_URL || '/img/IngaussLogoMin.webp';
 export const marqueeDefaultText: string = import.meta.env.VITE_MARQUEE_DEFAULT_TEXT || 'Bienvenido a nuestra plataforma.';
+
+// --- PERSISTENCE CONFIGURATION ---
+export const persistenceMode: 'local' | 'canister' = (import.meta.env.VITE_PERSISTENCE_MODE === 'canister' ? 'canister' : 'local');
+export const userAccountCanisterId: string = import.meta.env.VITE_USER_ACCOUNT_CANISTER_ID || '';
+export const icHostUrl: string = import.meta.env.VITE_IC_HOST_URL || '';

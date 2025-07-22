@@ -7,15 +7,15 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import TimeZoneModal from '../modals/TimeZoneModal';
 import { ChevronDown } from 'lucide-react';
 import { salaryRange, workplaceTags, maxWorkplaceTags } from '../../config/features';
-import { saveUserAccount, loadUserAccount } from '../../api/mockApi';
+import { saveUserAccount, loadUserAccount, UserAccount } from '../../api/mockApi';
 import toast from 'react-hot-toast';
 
-interface TagSelectorProps {
-  selectedTags: string[];
-  onTagChange: (newTags: string[]) => void;
+interface JobPreferencesTabProps {
+  formData: Partial<UserAccount>;
+  setFormData: React.Dispatch<React.SetStateAction<Partial<UserAccount>>>;
 }
 
-const TagSelector: React.FC<TagSelectorProps> = ({ selectedTags, onTagChange }) => {
+const TagSelector: React.FC<{ selectedTags: string[]; onTagChange: (newTags: string[]) => void; }> = ({ selectedTags, onTagChange }) => {
     const { t } = useTranslation();
   
     const handleTagClick = (tagKey: string): void => {
@@ -43,56 +43,32 @@ const TagSelector: React.FC<TagSelectorProps> = ({ selectedTags, onTagChange }) 
     );
 };
 
-interface JobFormData {
-  locations: string[];
-  salaryRange: [number, number];
-  tags: string[];
-  preferredTimezone: string;
-}
-
-const JobPreferencesTab: React.FC = () => {
+const JobPreferencesTab: React.FC<JobPreferencesTabProps> = ({ formData, setFormData }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [isTimezoneModalOpen, setIsTimezoneModalOpen] = useState<boolean>(false);
-  
-  const [formData, setFormData] = useState<JobFormData>({
-    locations: [],
-    salaryRange: [salaryRange.min, salaryRange.max],
-    tags: [],
-    preferredTimezone: ''
-  });
 
-  useEffect(() => {
-    const loadData = async () => {
-      const account = await loadUserAccount();
-      if (account?.job) {
-        setFormData(account.job);
-      }
-    };
-    loadData();
-  }, []);
+  const jobData = formData.job || { locations: [], salaryRange: [salaryRange.min, salaryRange.max], tags: [], preferredTimezone: '' };
 
-  const handleLocationChange = (newLocations: string[]): void => {
-    setFormData(prev => ({ ...prev, locations: newLocations }));
-  };
-
-  const handleSalaryChange = (newRange: [number, number]): void => {
-    setFormData(prev => ({ ...prev, salaryRange: newRange }));
-  };
-  
-  const handleTagsChange = (newTags: string[]): void => {
-    setFormData(prev => ({...prev, tags: newTags }));
-  };
-
-  const handleTimezoneChange = (value: string): void => {
-    setFormData(prev => ({ ...prev, preferredTimezone: value }));
+  // --- CORRECCIÓN: Lógica de actualización de estado segura y centralizada ---
+  const updateJobField = <K extends keyof typeof jobData>(
+    field: K,
+    value: (typeof jobData)[K]
+  ) => {
+    setFormData(prev => ({
+      ...prev,
+      job: {
+        ...(prev.job || jobData), // Usamos una base completa si prev.job no existe
+        [field]: value,
+      },
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await saveUserAccount({ job: formData });
+      await saveUserAccount({ job: jobData });
       toast.success(t('settings.api_success.message'));
     } catch (error) {
       toast.error(t('settings.api_error.message'));
@@ -106,8 +82,8 @@ const JobPreferencesTab: React.FC = () => {
       <TimeZoneModal 
         isOpen={isTimezoneModalOpen}
         onClose={() => setIsTimezoneModalOpen(false)}
-        currentValue={formData.preferredTimezone}
-        onValueChange={handleTimezoneChange}
+        currentValue={jobData.preferredTimezone}
+        onValueChange={(value) => updateJobField('preferredTimezone', value)}
       />
 
       <Form.Root onSubmit={handleSubmit}>
@@ -115,18 +91,9 @@ const JobPreferencesTab: React.FC = () => {
           <Form.Field name="locations" asChild>
             <Flex direction="column" gap="1">
               <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.location')}</Text></Form.Label>
-              <ToggleGroup.Root 
-                type="multiple" 
-                className="tag-selector" 
-                value={formData.locations} 
-                onValueChange={handleLocationChange}
-              >
+              <ToggleGroup.Root type="multiple" className="tag-selector" value={jobData.locations} onValueChange={(value) => updateJobField('locations', value)}>
                 {['onsite', 'hybrid', 'remote'].map(locKey => (
-                  <ToggleGroup.Item
-                    key={locKey}
-                    value={locKey}
-                    className={`tag-button ${formData.locations.includes(locKey) ? 'selected' : ''}`}
-                  >
+                  <ToggleGroup.Item key={locKey} value={locKey} className={`tag-button ${jobData.locations.includes(locKey) ? 'selected' : ''}`}>
                     {t(`settings.job_form.location_${locKey}`)}
                   </ToggleGroup.Item>
                 ))}
@@ -137,13 +104,13 @@ const JobPreferencesTab: React.FC = () => {
           <Form.Field name="salary" asChild>
             <Flex direction="column" gap="1">
               <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.salary')}</Text></Form.Label>
-              <Slider.Root className="slider-root" min={salaryRange.min} max={salaryRange.max} step={1000} value={formData.salaryRange} onValueChange={handleSalaryChange}>
+              <Slider.Root className="slider-root" min={salaryRange.min} max={salaryRange.max} step={1000} value={jobData.salaryRange} onValueChange={(value) => updateJobField('salaryRange', value as [number, number])}>
                 <Slider.Track className="slider-track"><Slider.Range className="slider-range" /></Slider.Track>
                 <Slider.Thumb className="slider-thumb" /><Slider.Thumb className="slider-thumb" />
               </Slider.Root>
               <Flex justify="between" mt="1">
-                <Text size="1" color="gray">${formData.salaryRange[0].toLocaleString()}</Text>
-                <Text size="1" color="gray">${formData.salaryRange[1].toLocaleString()}</Text>
+                <Text size="1" color="gray">${jobData.salaryRange[0].toLocaleString()}</Text>
+                <Text size="1" color="gray">${jobData.salaryRange[1].toLocaleString()}</Text>
               </Flex>
             </Flex>
           </Form.Field>
@@ -152,11 +119,9 @@ const JobPreferencesTab: React.FC = () => {
             <Flex direction="column" gap="1">
                 <Flex justify="between" align="center">
                   <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.workplace_tags')}</Text></Form.Label>
-                  <Badge color="gray" radius="full" size="2">
-                    {formData.tags.length} / {maxWorkplaceTags}
-                  </Badge>
+                  <Badge color="gray" radius="full" size="2">{jobData.tags.length} / {maxWorkplaceTags}</Badge>
                 </Flex>
-                <TagSelector selectedTags={formData.tags} onTagChange={handleTagsChange} />
+                <TagSelector selectedTags={jobData.tags} onTagChange={(value) => updateJobField('tags', value)} />
             </Flex>
           </Form.Field>
 
@@ -165,9 +130,7 @@ const JobPreferencesTab: React.FC = () => {
               <Flex direction="column" gap="1">
                 <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.timezone')}</Text></Form.Label>
                 <Button variant="soft" onClick={() => setIsTimezoneModalOpen(true)} type="button">
-                    <Text>
-                      {formData.preferredTimezone || t('settings.job_form.timezone_placeholder')}
-                    </Text>
+                    <Text>{jobData.preferredTimezone || t('settings.job_form.timezone_placeholder')}</Text>
                     <ChevronDown />
                 </Button>
               </Flex>

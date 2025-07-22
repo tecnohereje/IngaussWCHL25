@@ -3,70 +3,63 @@ import { useTranslation } from 'react-i18next';
 import { Flex, Text, TextField, Button, IconButton } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { Plus, Trash2, Linkedin, Github, Instagram, Twitter, Link as LinkIcon } from 'lucide-react';
-import { saveUserAccount, loadUserAccount } from '../../api/mockApi';
+import { saveUserAccount, loadUserAccount, UserAccount } from '../../api/mockApi';
 import toast from 'react-hot-toast';
 
-interface SocialLink {
-  id: number;
-  url: string;
+interface SocialMediaTabProps {
+  formData: Partial<UserAccount>;
+  setFormData: React.Dispatch<React.SetStateAction<Partial<UserAccount>>>;
 }
 
-interface SocialFormData {
-  linkedin: string;
-  github: string;
-  instagram: string;
-  x: string;
-  additional: SocialLink[];
-}
-
-const SocialMediaTab: React.FC = () => {
+const SocialMediaTab: React.FC<SocialMediaTabProps> = ({ formData, setFormData }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
-  const [formData, setFormData] = useState<SocialFormData>({
-    linkedin: '',
-    github: '',
-    instagram: '',
-    x: '',
-    additional: [],
-  });
-  
-  useEffect(() => {
-    const loadData = async () => {
-      const account = await loadUserAccount();
-      if (account?.social) {
-        setFormData(account.social);
-      }
-    };
-    loadData();
-  }, []);
+  // Garantizamos que socialData siempre sea un objeto completo
+  const socialData = formData.social || { linkedin: '', github: '', instagram: '', x: '', additional: [] };
+
+  // --- CORRECCIÓN: Lógica de actualización de estado segura y centralizada ---
+  const updateSocialData = (updateFn: (currentSocial: typeof socialData) => typeof socialData) => {
+    setFormData(prev => ({
+      ...prev,
+      social: updateFn(prev.social || socialData),
+    }));
+  };
 
   const handleStaticChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    updateSocialData(currentSocial => ({ ...currentSocial, [name]: value }));
   };
 
   const handleAdditionalChange = (id: number, value: string) => {
-    const newAdditional = formData.additional.map(item =>
-      item.id === id ? { ...item, url: value } : item
-    );
-    setFormData(prev => ({ ...prev, additional: newAdditional }));
+    updateSocialData(currentSocial => ({
+      ...currentSocial,
+      additional: (currentSocial.additional || []).map(item =>
+        item.id === id ? { ...item, url: value } : item
+      ),
+    }));
   };
 
   const addSocialField = (): void => {
     const newId = Date.now();
-    setFormData(prev => ({ ...prev, additional: [...prev.additional, { id: newId, url: '' }] }));
+    updateSocialData(currentSocial => ({
+      ...currentSocial,
+      additional: [...(currentSocial.additional || []), { id: newId, url: '' }],
+    }));
   };
 
   const removeSocialField = (id: number): void => {
-    setFormData(prev => ({ ...prev, additional: prev.additional.filter(item => item.id !== id) }));
+    updateSocialData(currentSocial => ({
+      ...currentSocial,
+      additional: (currentSocial.additional || []).filter(item => item.id !== id),
+    }));
   };
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await saveUserAccount({ social: formData });
+      await saveUserAccount({ social: socialData });
       toast.success(t('settings.api_success.message'));
     } catch (error) {
       toast.error(t('settings.api_error.message'));
@@ -91,20 +84,17 @@ const SocialMediaTab: React.FC = () => {
               <Flex direction="column" gap="1">
                 <Form.Label asChild><Text size="2" weight="bold">{field.name.charAt(0).toUpperCase() + field.name.slice(1)}</Text></Form.Label>
                 <Form.Control asChild>
-                  <TextField.Root name={field.name} type="url" value={formData[field.name]} onChange={handleStaticChange}>
+                  <TextField.Root name={field.name} type="url" value={socialData[field.name]} onChange={handleStaticChange}>
                     <TextField.Slot>{field.icon}</TextField.Slot>
                   </TextField.Root>
                 </Form.Control>
-                {/* --- MENSAJE DE VALIDACIÓN AÑADIDO --- */}
-                <Form.Message className="form-message" match="typeMismatch">
-                  {t('form_validation.type_mismatch_url')}
-                </Form.Message>
+                <Form.Message className="form-message" match="typeMismatch">{t('form_validation.type_mismatch_url')}</Form.Message>
               </Flex>
             </label>
           </Form.Field>
         ))}
         
-        {formData.additional.map((item, index) => (
+        {socialData.additional.map((item, index) => (
           <Flex key={item.id} gap="2" align="end">
             <Form.Field name={`additional-url-${item.id}`} asChild style={{ flexGrow: 1 }}>
               <label>
@@ -115,10 +105,7 @@ const SocialMediaTab: React.FC = () => {
                       <TextField.Slot><LinkIcon size={16} /></TextField.Slot>
                     </TextField.Root>
                   </Form.Control>
-                   {/* --- MENSAJE DE VALIDACIÓN AÑADIDO --- */}
-                  <Form.Message className="form-message" match="typeMismatch">
-                    {t('form_validation.type_mismatch_url')}
-                  </Form.Message>
+                  <Form.Message className="form-message" match="typeMismatch">{t('form_validation.type_mismatch_url')}</Form.Message>
                 </Flex>
               </label>
             </Form.Field>

@@ -110,6 +110,10 @@
       "total_playtime": "Tiempo Total de Juego",
       "last_played": "Última vez jugado",
       "sponsors_title": "Potenciales Patrocinadores"
+    },
+    "form_validation": {
+      "value_missing": "Este campo es obligatorio.",
+      "type_mismatch_email": "Por favor, ingresa un correo electrónico válido."
     }
   }
 }

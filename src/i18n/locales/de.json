@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "Einstellungsbereich",
-      "testing_button": "Testbereich"
+      "testing_button": "Testbereich",
+      "settings_card_description": "Verwalten Sie Ihr Profil, Ihre Job-Präferenzen und sozialen Links.",
+      "testing_card_description": "Greifen Sie auf Entwicklungstools und experimentelle Funktionen zu."
     },
     "settings": {
       "title": "Einstellungen",
@@ -108,6 +110,10 @@
       "total_playtime": "Gesamte Spielzeit",
       "last_played": "Zuletzt gespielt",
       "sponsors_title": "Potenzielle Sponsoren"
+    },
+    "form_validation": {
+      "value_missing": "Dieses Feld ist erforderlich.",
+      "type_mismatch_email": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
     }
   }
 }

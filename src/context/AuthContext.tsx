@@ -3,9 +3,8 @@ import { AuthClient } from '@dfinity/auth-client';
 import { Identity } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
 import { iiDerivationOrigin, loginLogoUrl } from '../config/features';
-import { fetchEnrichedProfile, EnrichedProfile } from '../api/mockApi'; // Importar tipos y función
+import { fetchEnrichedProfile, EnrichedProfile } from '../api/mockApi';
 
-// --- Se usa la interfaz importada ---
 type UserProfile = EnrichedProfile;
 
 interface AuthContextType {
@@ -19,13 +18,16 @@ interface AuthContextType {
   loginWithIi: () => Promise<void>;
   logout: () => Promise<void>;
   bypassLogin: () => void;
+  updateUserProfile: (newProfileData: Partial<UserProfile>) => void; // <-- NUEVA FUNCIÓN
 }
 
-// ... (El resto del archivo AuthContext.tsx no cambia)
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authClient, setAuthClient] = useState<AuthClient | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
@@ -119,6 +121,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // --- NUEVA FUNCIÓN PARA ACTUALIZAR EL PERFIL ---
+  const updateUserProfile = (newProfileData: Partial<UserProfile>) => {
+    setUserProfile(prevProfile => ({
+      ...prevProfile,
+      ...newProfileData
+    }));
+  };
+
   const bypassLogin = (): void => {
     console.warn("Bypassing real authentication. For development use only.");
     const mockPrincipal = Principal.fromText("qoctq-giaaa-aaaaa-aaaea-cai");
@@ -153,6 +163,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loginWithIi,
     logout,
     bypassLogin,
+    updateUserProfile, // <-- Exponer la nueva función
   };
 
   return (

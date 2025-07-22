@@ -110,6 +110,10 @@
       "total_playtime": "Total Playtime",
       "last_played": "Last Played",
       "sponsors_title": "Potential Sponsors"
+    },
+    "form_validation": {
+      "value_missing": "This field is required.",
+      "type_mismatch_email": "Please enter a valid email address."
     }
   }
 }

@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "Área de Configuração",
-      "testing_button": "Área de Testes"
+      "testing_button": "Área de Testes",
+      "settings_card_description": "Gerencie seu perfil, preferências de trabalho e links sociais.",
+      "testing_card_description": "Acesse ferramentas de desenvolvimento e recursos experimentais."
     },
     "settings": {
       "title": "Configurações",
@@ -108,6 +110,10 @@
       "total_playtime": "Tempo Total de Jogo",
       "last_played": "Última vez jogado",
       "sponsors_title": "Potenciais Patrocinadores"
+    },
+    "form_validation": {
+      "value_missing": "Este campo é obrigatório.",
+      "type_mismatch_email": "Por favor, insira um e-mail válido."
     }
   }
 }

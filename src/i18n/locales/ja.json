@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "設定ゾーン",
-      "testing_button": "テストゾーン"
+      "testing_button": "テストゾーン",
+      "settings_card_description": "プロフィール、職務経歴、ソーシャルリンクを管理します。",
+      "testing_card_description": "開発ツールと実験的な機能にアクセスします。"
     },
     "settings": {
       "title": "設定",
@@ -108,6 +110,10 @@
       "total_playtime": "総プレイ時間",
       "last_played": "最終プレイ日時",
       "sponsors_title": "潜在的なスポンサー"
+    },
+    "form_validation": {
+      "value_missing": "このフィールドは必須です。",
+      "type_mismatch_email": "有効なメールアドレスを入力してください。"
     }
   }
 }

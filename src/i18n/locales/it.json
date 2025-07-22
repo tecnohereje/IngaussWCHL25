@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "Area Impostazioni",
-      "testing_button": "Area Test"
+      "testing_button": "Area Test",
+      "settings_card_description": "Gestisci il tuo profilo, le preferenze di lavoro e i link social.",
+      "testing_card_description": "Accedi agli strumenti di sviluppo e alle funzionalità sperimentali."
     },
     "settings": {
       "title": "Impostazioni",
@@ -108,6 +110,10 @@
       "total_playtime": "Tempo di Gioco Totale",
       "last_played": "Ultima partita",
       "sponsors_title": "Potenziali Sponsor"
+    },
+    "form_validation": {
+      "value_missing": "Questo campo è obbligatorio.",
+      "type_mismatch_email": "Inserisci un indirizzo email valido."
     }
   }
 }

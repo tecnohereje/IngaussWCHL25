@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "Zone de Configuration",
-      "testing_button": "Zone de Test"
+      "testing_button": "Zone de Test",
+      "settings_card_description": "Gérez votre profil, vos préférences d'emploi et vos liens sociaux.",
+      "testing_card_description": "Accédez aux outils de développement et aux fonctionnalités expérimentales."
     },
     "settings": {
       "title": "Paramètres",
@@ -108,6 +110,10 @@
       "total_playtime": "Temps de Jeu Total",
       "last_played": "Dernière partie jouée",
       "sponsors_title": "Sponsors Potentiels"
+    },
+    "form_validation": {
+      "value_missing": "Ce champ est obligatoire.",
+      "type_mismatch_email": "Veuillez saisir une adresse e-mail valide."
     }
   }
 }

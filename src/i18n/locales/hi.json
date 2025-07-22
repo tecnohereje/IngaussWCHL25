@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "सेटिंग्स जोन",
-      "testing_button": "टेस्टिंग जोन"
+      "testing_button": "टेस्टिंग जोन",
+      "settings_card_description": "अपनी प्रोफ़ाइल, नौकरी की प्राथमिकताएं और सामाजिक लिंक प्रबंधित करें।",
+      "testing_card_description": "डेवलपर टूल और प्रायोगिक सुविधाओं तक पहुंचें।"
     },
     "settings": {
       "title": "सेटिंग्स",
@@ -108,6 +110,10 @@
       "total_playtime": "कुल खेलने का समय",
       "last_played": "पिछली बार खेला गया",
       "sponsors_title": "संभावित प्रायोजक"
+    },
+    "form_validation": {
+      "value_missing": "यह फ़ील्ड आवश्यक है।",
+      "type_mismatch_email": "कृपया एक वैध ईमेल पता दर्ज करें।"
     }
   }
 }

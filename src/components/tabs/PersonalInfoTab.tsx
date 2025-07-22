@@ -6,6 +6,7 @@ import { Paperclip, FileText } from 'lucide-react';
 import { maxProfilePicSize, maxResumeSize } from '../../config/features';
 import { saveUserAccount, loadUserAccount } from '../../api/mockApi';
 import toast from 'react-hot-toast';
+import { useAuth } from '../../context/AuthContext';
 
 interface PersonalFormData {
   profilePic: File | null;
@@ -19,6 +20,7 @@ interface PersonalFormData {
 
 const PersonalInfoTab: React.FC = () => {
   const { t } = useTranslation();
+  const { updateUserProfile } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [profilePreview, setProfilePreview] = useState<string | null>(null);
   
@@ -98,6 +100,10 @@ const PersonalInfoTab: React.FC = () => {
     setIsLoading(true);
     try {
       await saveUserAccount({ personal: formData });
+      updateUserProfile({
+        fullName: formData.fullName,
+        email: formData.email
+      });
       toast.success(t('settings.api_success.message'));
     } catch (error) {
       toast.error(t('settings.api_error.message'));
@@ -113,7 +119,11 @@ const PersonalInfoTab: React.FC = () => {
           <label>
             <Flex direction="column" gap="1">
               <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.full_name')}</Text></Form.Label>
-              <Form.Control asChild><TextField.Root name="fullName" value={formData.fullName} onChange={handleChange} /></Form.Control>
+              <Form.Control asChild><TextField.Root name="fullName" value={formData.fullName} onChange={handleChange} required /></Form.Control>
+              {/* --- AVISO RESTAURADO --- */}
+              <Form.Message className="form-message" match="valueMissing">
+                {t('form_validation.value_missing')}
+              </Form.Message>
             </Flex>
           </label>
         </Form.Field>
@@ -122,7 +132,14 @@ const PersonalInfoTab: React.FC = () => {
           <label>
             <Flex direction="column" gap="1">
               <Form.Label asChild><Text size="2" weight="bold">{t('settings.personal_form.email')}</Text></Form.Label>
-              <Form.Control asChild><TextField.Root name="email" type="email" value={formData.email} onChange={handleChange} /></Form.Control>
+              <Form.Control asChild><TextField.Root name="email" type="email" value={formData.email} onChange={handleChange} required /></Form.Control>
+              {/* --- AVISOS RESTAURADOS --- */}
+              <Form.Message className="form-message" match="valueMissing">
+                {t('form_validation.value_missing')}
+              </Form.Message>
+              <Form.Message className="form-message" match="typeMismatch">
+                {t('form_validation.type_mismatch_email')}
+              </Form.Message>
             </Flex>
           </label>
         </Form.Field>

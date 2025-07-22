@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "设置区",
-      "testing_button": "测试区"
+      "testing_button": "测试区",
+      "settings_card_description": "管理您的个人资料、工作偏好和社交链接。",
+      "testing_card_description": "访问开发工具和实验性功能。"
     },
     "settings": {
       "title": "设置",
@@ -108,6 +110,10 @@
       "total_playtime": "总游戏时间",
       "last_played": "上次游戏",
       "sponsors_title": "潜在赞助商"
+    },
+    "form_validation": {
+      "value_missing": "此字段为必填项。",
+      "type_mismatch_email": "请输入有效的电子邮件地址。"
     }
   }
 }

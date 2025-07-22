@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "설정 영역",
-      "testing_button": "테스트 영역"
+      "testing_button": "테스트 영역",
+      "settings_card_description": "프로필, 직업 선호도 및 소셜 링크를 관리하세요.",
+      "testing_card_description": "개발 도구 및 실험 기능에 액세스하세요."
     },
     "settings": {
       "title": "설정",
@@ -108,6 +110,10 @@
       "total_playtime": "총 플레이 시간",
       "last_played": "마지막 플레이",
       "sponsors_title": "잠재적 스폰서"
+    },
+    "form_validation": {
+      "value_missing": "이 필드는 필수입니다.",
+      "type_mismatch_email": "유효한 이메일 주소를 입력하세요."
     }
   }
 }

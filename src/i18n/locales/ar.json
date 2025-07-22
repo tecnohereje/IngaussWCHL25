@@ -21,7 +21,9 @@
     },
     "dashboard": {
       "settings_button": "منطقة الإعدادات",
-      "testing_button": "منطقة الاختبار"
+      "testing_button": "منطقة الاختبار",
+      "settings_card_description": "إدارة ملفك الشخصي وتفضيلات الوظيفة والروابط الاجتماعية.",
+      "testing_card_description": "الوصول إلى أدوات المطور والميزات التجريبية."
     },
     "settings": {
       "title": "الإعدادات",
@@ -108,6 +110,10 @@
       "total_playtime": "إجمالي وقت اللعب",
       "last_played": "آخر مرة لعبت فيها",
       "sponsors_title": "الرعاة المحتملون"
+    },
+    "form_validation": {
+      "value_missing": "هذا الحقل مطلوب.",
+      "type_mismatch_email": "يرجى إدخال عنوان بريد إلكتروني صالح."
     }
   }
 }

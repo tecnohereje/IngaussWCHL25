@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowJs": true,
+    "outDir": "../../.azle",
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "**/*"
+  ]
+}

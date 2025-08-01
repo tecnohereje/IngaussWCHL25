@@ -1,37 +1,17 @@
 {
-  "version": 1,
-  "dfx": "0.17.0",
-  "canisters": {
-    "ingauss_backend": {
-      "type": "custom",
-      "main": "src/ingauss_backend/index.ts",
-      "candid": "src/ingauss_backend/index.did",
-      "build": "npx azle ingauss_backend --tsconfig src/ingauss_backend/tsconfig.json",
-      "wasm": ".azle/ingauss_backend/ingauss_backend.wasm.gz"
-    },
-    "ingauss_frontend": {
-      "type": "assets",
-      "source": [
-        "dist"
-      ],
-      "dependencies": [
-        "ingauss_backend"
-      ],
-      "frontend": {
-        "entrypoint": "src/index.html"
-      }
+    "canisters": {
+        "ingauss-backend-wchl25": {
+            "type": "azle",
+            "main": "src/index.ts",
+            "declarations": {
+                "output": "test/dfx_generated/ingauss-backend-wchl25",
+                "node_compatibility": true
+            },
+            "custom": {
+                "experimental": true,
+                "assets": [["src/frontend/dist", "dist"]],
+                "build_assets": "npm --prefix src/frontend run build"
+            }
+        }
     }
-  },
-  "defaults": {
-    "build": {
-      "packtool": "npm run build",
-      "args": ""
-    }
-  },
-  "networks": {
-    "local": {
-      "bind": "127.0.0.1:4943",
-      "type": "ephemeral"
-    }
-  }
 }

@@ -18,7 +18,7 @@ interface AuthContextType {
   loginWithIi: () => Promise<void>;
   logout: () => Promise<void>;
   bypassLogin: () => void;
-  updateUserProfile: (newProfileData: Partial<UserProfile>) => void; // <-- NUEVA FUNCIÓN
+  updateUserProfile: (newProfileData: Partial<UserProfile>) => void; // <-- NEW FUNCTION
 }
 
 interface AuthProviderProps {
@@ -121,7 +121,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // --- NUEVA FUNCIÓN PARA ACTUALIZAR EL PERFIL ---
+  // --- NEW FUNCTION TO UPDATE THE PROFILE ---
   const updateUserProfile = (newProfileData: Partial<UserProfile>) => {
     setUserProfile(prevProfile => ({
       ...prevProfile,
@@ -163,7 +163,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     loginWithIi,
     logout,
     bypassLogin,
-    updateUserProfile, // <-- Exponer la nueva función
+    updateUserProfile, // <-- Expose the new function
   };
 
   return (

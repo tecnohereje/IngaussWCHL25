@@ -5,7 +5,7 @@ interface MarqueeProps {
 }
 
 const Marquee: React.FC<MarqueeProps> = ({ texts }) => {
-  // Duplicamos el contenido para un efecto de bucle infinito y suave
+  // We duplicate the content for a smooth, infinite loop effect
   const marqueeContent = [...texts, ...texts];
 
   return (

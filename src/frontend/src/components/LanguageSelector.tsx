@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Dialog, IconButton, Heading, Grid, Flex, Text } from '@radix-ui/themes';
 import { Languages } from 'lucide-react';
 
-// 1. Definimos una interfaz para la estructura de nuestros datos de idioma
+// 1. We define an interface for the structure of our language data
 interface LanguageInfo {
   code: string;
   name: string;

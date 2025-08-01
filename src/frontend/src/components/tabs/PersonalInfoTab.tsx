@@ -45,7 +45,7 @@ const PersonalInfoTab: React.FC<TabComponentProps> = ({ formData, setFormData })
         if (fileType === 'profilePic') setProfilePreview(URL.createObjectURL(file));
         updateField(fileType, file);
       } else {
-        alert(`Error: Archivo inválido (tipo o tamaño incorrecto).`);
+        alert(`Error: Invalid file (incorrect type or size).`);
         e.target.value = '';
       }
     } else {
@@ -57,7 +57,7 @@ const PersonalInfoTab: React.FC<TabComponentProps> = ({ formData, setFormData })
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!principal) {
-      toast.error("Error: Usuario no identificado.");
+      toast.error("Error: User not identified.");
       return;
     }
     setIsLoading(true);
@@ -101,13 +101,13 @@ const PersonalInfoTab: React.FC<TabComponentProps> = ({ formData, setFormData })
           <Flex align="center" gap="4" mt="1">
             <Avatar size="8" radius="full" fallback="?" src={profilePreview || (personalData.profilePic ? URL.createObjectURL(personalData.profilePic) : undefined)} />
             <Button asChild variant="soft">
-              <label htmlFor="profile-pic-input">Seleccionar Imagen</label>
+              <label htmlFor="profile-pic-input">Select Image</label>
             </Button>
             <Form.Control asChild>
               <input id="profile-pic-input" type="file" className="visually-hidden" accept="image/*" onChange={(e) => handleFileChange(e, 'profilePic')} />
             </Form.Control>
           </Flex>
-          <Text size="1" color="gray" mt="1">Máximo {maxProfilePicSize / 1024}kb. Solo imágenes.</Text>
+          <Text size="1" color="gray" mt="1">Max {maxProfilePicSize / 1024}kb. Images only.</Text>
         </Form.Field>
 
         <Form.Field name="cv" className="form-group">
@@ -116,7 +116,7 @@ const PersonalInfoTab: React.FC<TabComponentProps> = ({ formData, setFormData })
               <label htmlFor="cv-input">
                 <Flex align="center" gap="2">
                     <Paperclip size={14}/>
-                    {personalData.cv ? 'Cambiar PDF' : 'Subir PDF'}
+                    {personalData.cv ? 'Change PDF' : 'Upload PDF'}
                 </Flex>
               </label>
             </Button>
@@ -134,7 +134,7 @@ const PersonalInfoTab: React.FC<TabComponentProps> = ({ formData, setFormData })
                 </Flex>
               </Card>
             )}
-            <Text size="1" color="gray" mt="1">Máximo {maxResumeSize / 1024}kb. Solo PDF.</Text>
+            <Text size="1" color="gray" mt="1">Max {maxResumeSize / 1024}kb. PDF only.</Text>
         </Form.Field>
         
         <Form.Field name="bio" asChild>

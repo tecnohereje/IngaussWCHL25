@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Dialog, Heading, Flex, Button, Text } from '@radix-ui/themes';
 import { Landmark, Repeat, ArrowUpRight } from 'lucide-react';
 
-// --- Definimos el tipo para cada objeto de exchange ---
+// --- We define the type for each exchange object ---
 interface Exchange {
   name: string;
   icon: React.ReactNode;
@@ -15,7 +15,7 @@ const exchanges: Exchange[] = [
   { name: 'Kraken', icon: <Landmark /> },
 ];
 
-// --- Definimos las props del componente ---
+// --- We define the component's props ---
 interface WithdrawModalProps {
   isOpen: boolean;
   onClose: () => void;

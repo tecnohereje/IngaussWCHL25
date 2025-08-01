@@ -1,7 +1,7 @@
 import React from 'react';
 
-// Definimos los tipos para las props.
-// 'style' es un objeto de estilos CSS de React.
+// We define the types for the props.
+// 'style' is a React CSSProperties object.
 interface SkeletonProps {
   style?: React.CSSProperties;
 }

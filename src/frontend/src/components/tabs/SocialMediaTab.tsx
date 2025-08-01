@@ -54,7 +54,7 @@ const SocialMediaTab: React.FC<TabComponentProps> = ({ formData, setFormData }) 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!principal) {
-      toast.error("Error: Usuario no identificado.");
+      toast.error("Error: User not identified.");
       return;
     }
     setIsLoading(true);

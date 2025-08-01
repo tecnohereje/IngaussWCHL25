@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Theme, Box } from '@radix-ui/themes';
-import { Toaster } from 'react-hot-toast'; // <-- 1. Importar Toaster
+import { Toaster } from 'react-hot-toast'; // <-- 1. Import Toaster
 import { useAuth } from './context/AuthContext';
 import { useTheme } from './context/ThemeContext';
 import Loader from './components/Loader';

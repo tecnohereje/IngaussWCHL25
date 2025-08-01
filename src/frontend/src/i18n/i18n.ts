@@ -14,7 +14,7 @@ import ru from './locales/ru.json';
 import ar from './locales/ar.json';
 import hi from './locales/hi.json';
 
-// Los recursos se definen con un tipo para asegurar que todas las claves sean strings
+// The resources are defined with a type to ensure all keys are strings
 const resources: { [lang: string]: { translation: object } } = {
   en, es, pt, fr, de, it, zh, ko, ja, ru, ar, hi,
 };
@@ -23,10 +23,10 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en', // Idioma por defecto
-    fallbackLng: 'en', // Idioma de respaldo
+    lng: 'en', // Default language
+    fallbackLng: 'en', // Fallback language
     interpolation: {
-      escapeValue: false, // React ya se encarga de esto
+      escapeValue: false, // React already handles this
     },
   });
 

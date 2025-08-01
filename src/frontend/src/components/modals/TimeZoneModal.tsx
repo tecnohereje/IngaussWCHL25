@@ -11,7 +11,7 @@ interface TimeZoneModalProps {
   onValueChange: (value: string) => void;
 }
 
-// Tipamos el objeto que agrupará las zonas horarias
+// Type for the object that will group timezones
 type TimeZoneGroups = {
   [key: string]: string[];
 }
@@ -40,7 +40,7 @@ const TimeZoneModal: React.FC<TimeZoneModalProps> = ({ isOpen, onClose, currentV
         return acc;
       }, {});
       
-      // Ordenamos los grupos alfabéticamente
+      // Sort groups alphabetically
       return Object.keys(groups).sort().reduce(
         (obj: TimeZoneGroups, key) => { 
           obj[key] = groups[key]; 
@@ -49,7 +49,7 @@ const TimeZoneModal: React.FC<TimeZoneModalProps> = ({ isOpen, onClose, currentV
         {}
       );
     } catch (e) {
-      // Fallback para entornos antiguos que no soporten la API
+      // Fallback for older environments that do not support the API
       return { "UTC": ["UTC"] };
     }
   }, [filter]);
@@ -68,7 +68,7 @@ const TimeZoneModal: React.FC<TimeZoneModalProps> = ({ isOpen, onClose, currentV
         
         <Box mb="5">
           <TextField.Root 
-            placeholder="Filtrar por ciudad o región..."
+            placeholder="Filter by city or region..."
             value={filter}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilter(e.target.value)}
           >
@@ -100,7 +100,7 @@ const TimeZoneModal: React.FC<TimeZoneModalProps> = ({ isOpen, onClose, currentV
                 </Flex>
               ))
             ) : (
-              <Text align="center" color="gray">No se encontraron resultados.</Text>
+              <Text align="center" color="gray">No results found.</Text>
             )}
           </Flex>
         </ScrollArea>

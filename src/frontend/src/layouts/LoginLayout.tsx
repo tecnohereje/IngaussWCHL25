@@ -1,7 +1,7 @@
 import React from 'react';
 
-// Definimos los tipos para las props del componente.
-// En este caso, acepta 'children' que pueden ser cualquier nodo de React.
+// We define the types for the component's props.
+// In this case, it accepts 'children' which can be any React node.
 interface LoginLayoutProps {
   children: React.ReactNode;
 }
@@ -10,13 +10,13 @@ const LoginLayout: React.FC<LoginLayoutProps> = ({ children }) => {
   return (
     <div className="login-layout">
       <header className="login-page-header">
-        {/* Espacio para futuros logos de sponsors */}
+        {/* Space for future sponsor logos */}
       </header>
       <main className="login-page-main">
         {children}
       </main>
       <footer className="login-page-footer">
-        {/* Espacio para futuros logos de aliados */}
+        {/* Space for future partner logos */}
       </footer>
     </div>
   );

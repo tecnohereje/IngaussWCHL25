@@ -12,7 +12,7 @@ const LoginButton: React.FC = () => {
   const { loginWithNfid, loginWithIi, bypassLogin } = useAuth();
   const { t } = useTranslation();
 
-  // --- REFACTOR: Los manejadores ahora son asíncronos ---
+  // --- REFACTOR: Handlers are now asynchronous ---
   const handleLogin = async (provider: 'nfid' | 'ii') => {
     setLoadingProvider(provider);
     try {
@@ -21,14 +21,14 @@ const LoginButton: React.FC = () => {
       } else {
         await loginWithIi();
       }
-      // Si el login es exitoso, la página cambiará y este componente se desmontará.
-      // No necesitamos hacer nada aquí.
+      // If the login is successful, the page will change and this component will unmount.
+      // We don't need to do anything here.
     } catch (error) {
       console.error('Login process was cancelled or failed:', error);
-      // El error ya se maneja en el contexto, aquí solo nos aseguramos
-      // de que la UI se resetee en el bloque 'finally'.
+      // The error is already handled in the context, here we just make sure
+      // that the UI is reset in the 'finally' block.
     } finally {
-      // Este bloque se ejecuta SIEMPRE, tanto en éxito como en fracaso/cancelación.
+      // This block ALWAYS executes, on success, failure, or cancellation.
       setLoadingProvider(null);
     }
   };

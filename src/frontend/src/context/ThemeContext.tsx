@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
-// 1. Definimos el tipo para el valor del contexto
+// 1. We define the type for the context value
 type Theme = 'light' | 'dark';
 
 interface ThemeContextType {
@@ -8,16 +8,16 @@ interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-// 2. Creamos el contexto con un valor inicial tipado
+// 2. We create the context with a typed initial value
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// 3. Tipamos las props del Provider
+// 3. We type the Provider's props
 interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  // 4. Tipamos el estado de useState
+  // 4. We type the useState state
   const [theme, setTheme] = useState<Theme>(() => {
     const storedTheme = localStorage.getItem('app-theme');
     return (storedTheme === 'light' || storedTheme === 'dark') ? storedTheme : 'dark';
@@ -41,7 +41,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   );
 };
 
-// 5. Creamos un hook personalizado que verifica la nulidad
+// 5. We create a custom hook that checks for nullity
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (context === undefined) {

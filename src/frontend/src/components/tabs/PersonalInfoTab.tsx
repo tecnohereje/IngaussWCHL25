@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Flex, Text, TextField, TextArea, Switch, Button, Avatar, Card, Box } from '@radix-ui/themes';
+import { Flex, Text, TextField, TextArea, Switch, Button, Avatar, Card, Box, Spinner } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { Paperclip, FileText } from 'lucide-react';
 import { maxProfilePicSize, maxResumeSize } from '../../config/features';
@@ -163,7 +163,7 @@ const PersonalInfoTab: React.FC<TabComponentProps> = ({ formData, setFormData })
         <Flex mt="4" justify="end">
           <Form.Submit asChild>
             <Button disabled={isLoading}>
-              {isLoading ? t('settings.personal_form.saving_button') : t('settings.personal_form.save_button')}
+              {isLoading ? <Spinner /> : t('settings.personal_form.save_button')}
             </Button>
           </Form.Submit>
         </Flex>

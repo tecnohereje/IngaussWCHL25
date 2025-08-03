@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Flex, Text, Button, Badge } from '@radix-ui/themes';
+import { Flex, Text, Button, Badge, Spinner } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import * as Slider from '@radix-ui/react-slider';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
@@ -138,7 +138,7 @@ const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData 
           <Flex mt="4" justify="end">
             <Form.Submit asChild>
               <Button disabled={isLoading}>
-                {isLoading ? t('settings.personal_form.saving_button') : t('settings.personal_form.save_button')}
+                {isLoading ? <Spinner /> : t('settings.personal_form.save_button')}
               </Button>
             </Form.Submit>
           </Flex>

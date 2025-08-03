@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Flex, Text, TextField, Button, IconButton } from '@radix-ui/themes';
+import { Flex, Text, TextField, Button, IconButton, Spinner } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { Plus, Trash2, Linkedin, Github, Instagram, Twitter, Link as LinkIcon } from 'lucide-react';
 import { saveUserAccount } from '../../api/mockApi';
@@ -122,7 +122,7 @@ const SocialMediaTab: React.FC<TabComponentProps> = ({ formData, setFormData }) 
         <Flex mt="4" justify="end">
           <Form.Submit asChild>
             <Button disabled={isLoading}>
-              {isLoading ? t('settings.personal_form.saving_button') : t('settings.personal_form.save_button')}
+              {isLoading ? <Spinner /> : t('settings.personal_form.save_button')}
             </Button>
           </Form.Submit>
         </Flex>

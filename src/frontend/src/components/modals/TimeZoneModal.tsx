@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dialog, Heading, Flex, Button, Text, Grid, Box, ScrollArea, TextField } from '@radix-ui/themes';
+import { Dialog, Flex, Button, Text, Grid, Box, ScrollArea, TextField } from '@radix-ui/themes';
 import { Search } from 'lucide-react';
 
 // --- Definimos una interfaz para las props ---
@@ -24,11 +24,11 @@ const TimeZoneModal: React.FC<TimeZoneModalProps> = ({ isOpen, onClose, currentV
     try {
       const allTimezones = Intl.supportedValuesOf('timeZone');
       
-      const filteredTimezones = allTimezones.filter(tz => 
+      const filteredTimezones = allTimezones.filter((tz: string) => 
         tz.toLowerCase().replace(/_/g, ' ').includes(filter.toLowerCase())
       );
 
-      const groups = filteredTimezones.reduce((acc: TimeZoneGroups, tz) => {
+      const groups = filteredTimezones.reduce((acc: TimeZoneGroups, tz: string) => {
         const region = tz.split('/')[0];
         if (['Etc', 'SystemV', 'US'].includes(region)) return acc; // Filter out obscure regions
         
@@ -68,7 +68,7 @@ const TimeZoneModal: React.FC<TimeZoneModalProps> = ({ isOpen, onClose, currentV
         
         <Box mb="5">
           <TextField.Root 
-            placeholder="Filter by city or region..."
+            placeholder={t('forms.filter_placeholder')}
             value={filter}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilter(e.target.value)}
           >
@@ -100,7 +100,7 @@ const TimeZoneModal: React.FC<TimeZoneModalProps> = ({ isOpen, onClose, currentV
                 </Flex>
               ))
             ) : (
-              <Text align="center" color="gray">No results found.</Text>
+              <Text align="center" color="gray">{t('forms.no_results_found')}</Text>
             )}
           </Flex>
         </ScrollArea>

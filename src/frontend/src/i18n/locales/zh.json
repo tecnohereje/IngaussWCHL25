@@ -114,6 +114,19 @@
     "form_validation": {
       "value_missing": "此字段为必填项。",
       "type_mismatch_email": "请输入有效的电子邮件地址。"
+    },
+    "toasts": {
+      "user_not_identified": "Error: User not identified.",
+      "invalid_file": "Error: Invalid file (incorrect type or size)."
+    },
+    "forms": {
+      "select_image": "Select Image",
+      "change_pdf": "Change PDF",
+      "upload_pdf": "Upload PDF",
+      "max_image_size": "Max {{size}}kb. Images only.",
+      "max_pdf_size": "Max {{size}}kb. PDF only.",
+      "filter_placeholder": "Filter by city or region...",
+      "no_results_found": "No results found."
     }
   }
 }

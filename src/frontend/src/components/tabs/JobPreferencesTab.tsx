@@ -61,7 +61,7 @@ const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!principal) {
-      toast.error("Error: User not identified.");
+      toast.error(t('toasts.user_not_identified'));
       return;
     }
     setIsLoading(true);

@@ -6,17 +6,17 @@ export const PersonalInfoCandidInterface = IDL.Record({
     bio: IDL.Opt(IDL.Text),
     isSearching: IDL.Opt(IDL.Bool),
     shareContactInfo: IDL.Opt(IDL.Bool),
-    profilePic: IDL.Vec(IDL.Nat8),
-    cv: IDL.Vec(IDL.Nat8) 
+    profilePic: IDL.Opt(IDL.Vec(IDL.Nat8)),
+    cv: IDL.Opt(IDL.Vec(IDL.Nat8)),
 });
 export type PersonalInfoType = {
-    fullName?: string,
-    email?: string,
-    bio?: string,
-    isSearching?: boolean,
-    shareContactInfo?: boolean,
-    profilePic?: Uint8Array,
-    cv?: Uint8Array
+    fullName?: string;
+    email?: string;
+    bio?: string;
+    isSearching?: boolean;
+    shareContactInfo?: boolean;
+    profilePic?: Uint8Array | File;
+    cv?: Uint8Array | File;
 };
 
 export const SocialLinksCandidInterface = IDL.Record({
@@ -27,11 +27,11 @@ export const SocialLinksCandidInterface = IDL.Record({
     additional: IDL.Opt(IDL.Vec(IDL.Text)),
 });
 export type SocialLinksType = {
-    linkedin?: string,
-    github?: string,
-    instagram?: string,
-    x?: string,
-    additional?: string[],
+    linkedin?: string;
+    github?: string;
+    instagram?: string;
+    x?: string;
+    additional?: string[];
 };
 
 export const JobPreferencesCandidInterface = IDL.Record({
@@ -41,10 +41,10 @@ export const JobPreferencesCandidInterface = IDL.Record({
     preferredTimezone: IDL.Opt(IDL.Text),
 });
 export type JobPreferencesType = {
-    locations?: string[],
-    salaryRange?: number[],
-    workplaceTags?: string[],
-    preferredTimezone?: string,
+    locations?: string[];
+    salaryRange?: number[];
+    workplaceTags?: string[];
+    preferredTimezone?: string;
 };
 
 export const UserProfileCandidInterface = IDL.Record({
@@ -53,9 +53,9 @@ export const UserProfileCandidInterface = IDL.Record({
     job: JobPreferencesCandidInterface,
 });
 export type UserProfileType = {
-    personal: PersonalInfoType,
-    social: SocialLinksType,
-    job: JobPreferencesType,
+    personal: PersonalInfoType;
+    social: SocialLinksType;
+    job: JobPreferencesType;
 };
 
 export const UserStatsCandidInterface = IDL.Record({
@@ -68,13 +68,13 @@ export const UserStatsCandidInterface = IDL.Record({
     })))
 });
 export type UserStatsType = {
-    level: number,
-    experiencePoints: bigint,
+    level: number;
+    experiencePoints: bigint;
     medals:
     {
-        medalTitle: string,
-        medalImageUrl: string, 
-        medalDescription: string,
+        medalTitle: string;
+        medalImageUrl: string; 
+        medalDescription: string;
     }[]
 };
 
@@ -85,8 +85,8 @@ export const UserAccountCandidInterface = IDL.Record({
     stats: UserStatsCandidInterface,
 });
 export type UserAccountType = {
-    principal: Principal,
-    createdAt: bigint,
-    profile: UserProfileType,
-    stats: UserStatsType,
+    principal: Principal;
+    createdAt: bigint;
+    profile: UserProfileType;
+    stats: UserStatsType;
 };

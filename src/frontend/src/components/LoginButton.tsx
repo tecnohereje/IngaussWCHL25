@@ -9,26 +9,22 @@ import { Fingerprint, Infinity, Wrench } from 'lucide-react';
 
 const LoginButton: React.FC = () => {
   const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
-  const { loginWithNfid, loginWithIi, bypassLogin } = useAuth();
+  const { loginWithNfid, loginWithIi, loginAsDevelopmentUser } = useAuth();
   const { t } = useTranslation();
 
-  // --- REFACTOR: Handlers are now asynchronous ---
-  const handleLogin = async (provider: 'nfid' | 'ii') => {
+  const handleLogin = async (provider: 'nfid' | 'ii' | 'dev') => {
     setLoadingProvider(provider);
     try {
       if (provider === 'nfid') {
         await loginWithNfid();
-      } else {
+      } else if (provider === 'ii') {
         await loginWithIi();
+      } else {
+        await loginAsDevelopmentUser();
       }
-      // If the login is successful, the page will change and this component will unmount.
-      // We don't need to do anything here.
     } catch (error) {
-      console.error('Login process was cancelled or failed:', error);
-      // The error is already handled in the context, here we just make sure
-      // that the UI is reset in the 'finally' block.
+      console.error(`Login process (${provider}) was cancelled or failed:`, error);
     } finally {
-      // This block ALWAYS executes, on success, failure, or cancellation.
       setLoadingProvider(null);
     }
   };
@@ -68,9 +64,9 @@ const LoginButton: React.FC = () => {
               <Text color="gray" size="1" align="center" mt="2">
                 {t('login.dev_mode_prompt')}
               </Text>
-              <Button size="3" variant="soft" onClick={bypassLogin} disabled={!!loadingProvider}>
+              <Button size="3" variant="soft" onClick={() => handleLogin('dev')} disabled={!!loadingProvider}>
                 <Wrench size={16} />
-                {t('login.dev_mode_button')}
+                {loadingProvider === 'dev' ? <Spinner /> : t('login.dev_mode_button')}
               </Button>
             </>
           )}

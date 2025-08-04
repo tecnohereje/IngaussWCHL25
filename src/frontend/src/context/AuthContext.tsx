@@ -2,23 +2,26 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { AuthClient } from '@dfinity/auth-client';
 import { Identity } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
+import { Ed25519KeyIdentity } from '@dfinity/identity';
 import { iiDerivationOrigin, loginLogoUrl } from '../config/features';
-import { fetchEnrichedProfile, EnrichedProfile } from '../api/mockApi';
+import { getOrCreateAccount } from '../api/backend';
+import type { UserAccountType } from '../../../common/types';
 
-type UserProfile = EnrichedProfile;
+type UserProfile = UserAccountType;
 
 interface AuthContextType {
   isAuthenticated: boolean;
   isAuthLoading: boolean;
   isProfileLoading: boolean;
+  authClient: AuthClient | null;
   identity: Identity | null;
   principal: Principal | null;
   userProfile: UserProfile | null;
   loginWithNfid: () => Promise<void>;
   loginWithIi: () => Promise<void>;
+  loginAsDevelopmentUser: () => Promise<void>;
   logout: () => Promise<void>;
-  bypassLogin: () => void;
-  updateUserProfile: (newProfileData: Partial<UserProfile>) => void; // <-- NEW FUNCTION
+  updateUserProfile: (newProfileData: Partial<UserProfile>) => void;
 }
 
 interface AuthProviderProps {
@@ -43,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setAuthClient(client);
         if (await client.isAuthenticated()) {
           const userIdentity = client.getIdentity();
-          await handleAuthenticated(userIdentity);
+          await handleAuthenticated(userIdentity, client);
         }
       } catch (error) { console.error(error); }
       finally {
@@ -63,7 +66,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         onSuccess: async () => {
           try {
             const userIdentity = authClient.getIdentity();
-            await handleAuthenticated(userIdentity);
+            await handleAuthenticated(userIdentity, authClient);
             resolve();
           } catch (e) {
             reject(e);
@@ -94,6 +97,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
   };
 
+  const loginAsDevelopmentUser = async (): Promise<void> => {
+    // This creates a constant identity from a fixed seed phrase.
+    // NOTE: This is NOT secure and should ONLY be used for development.
+    const seed = new Uint8Array(32).fill(42); // A 32-byte array filled with the number 42.
+    const identity = Ed25519KeyIdentity.generate(seed);
+
+    if (authClient) {
+      await handleAuthenticated(identity, authClient);
+    }
+  };
+
   const logout = async (): Promise<void> => {
     if (!authClient) return;
     await authClient.logout();
@@ -103,67 +117,45 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUserProfile(null);
   };
 
-  const handleAuthenticated = async (userIdentity: Identity): Promise<void> => {
+  const handleAuthenticated = async (userIdentity: Identity, client: AuthClient): Promise<void> => {
     const userPrincipal = userIdentity.getPrincipal();
     setIdentity(userIdentity);
     setPrincipal(userPrincipal);
+    setAuthClient(client);
     setIsAuthenticated(true);
     
     setIsProfileLoading(true);
     try {
-      const profile = await fetchEnrichedProfile(userPrincipal);
+      const profile = await getOrCreateAccount(userIdentity);
       setUserProfile(profile);
     } catch (error) {
-      console.error("Failed to fetch enriched profile:", error);
+      console.error("Failed to fetch user profile:", error);
       setUserProfile(null);
     } finally {
       setIsProfileLoading(false);
     }
   };
 
-  // --- NEW FUNCTION TO UPDATE THE PROFILE ---
   const updateUserProfile = (newProfileData: Partial<UserProfile>) => {
-    setUserProfile(prevProfile => ({
-      ...prevProfile,
-      ...newProfileData
-    }));
-  };
-
-  const bypassLogin = (): void => {
-    console.warn("Bypassing real authentication. For development use only.");
-    const mockPrincipal = Principal.fromText("qoctq-giaaa-aaaaa-aaaea-cai");
-    const mockProfile: UserProfile = {
-      fullName: "Dev User",
-      email: "dev@user.com",
-      linkedin: "",
-      level: 99,
-      balances: { icp: 123, rbtc: 0.1, eth: 2.5 },
-      stats: {
-        score: 2500,
-        experience: 95,
-        totalPlaytime: "120h",
-        lastPlayed: new Date().toLocaleDateString(),
-      },
-      sponsors: ['google', 'apple']
-    };
-    setIdentity(null);
-    setPrincipal(mockPrincipal);
-    setUserProfile(mockProfile);
-    setIsAuthenticated(true);
+    setUserProfile(prevProfile => {
+      if (!prevProfile) return null;
+      return { ...prevProfile, ...newProfileData };
+    });
   };
   
   const value: AuthContextType = {
     isAuthenticated,
     isAuthLoading,
     isProfileLoading,
+    authClient,
     identity,
     principal,
     userProfile,
     loginWithNfid,
     loginWithIi,
+    loginAsDevelopmentUser,
     logout,
-    bypassLogin,
-    updateUserProfile, // <-- Expose the new function
+    updateUserProfile,
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +18,6 @@ import {
   headerLogoUrl,
   marqueeDefaultText
 } from '../config/features';
-import { fetchMarqueeTexts } from '../api/mockApi';
 
 const Header: React.FC = () => {
   const { userProfile, isProfileLoading, logout } = useAuth();
@@ -28,22 +27,11 @@ const Header: React.FC = () => {
 
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState<boolean>(false);
-  const [marqueeTexts, setMarqueeTexts] = useState<string[]>([marqueeDefaultText]);
-
-  useEffect(() => {
-    if (isMarqueeEnabled) {
-      fetchMarqueeTexts()
-        .then(texts => {
-          if (texts && texts.length > 0) {
-            setMarqueeTexts(texts);
-          }
-        })
-        .catch(console.error);
-    }
-  }, []);
+  const marqueeTexts: string[] = [marqueeDefaultText]; // Use default text directly
 
   const showBackButton: boolean = location.pathname !== '/';
-  const displayName: string = userProfile?.fullName || t('common.anonymous');
+  // Correctly access the nested full name property
+  const displayName: string = userProfile?.profile?.personal?.fullName || t('common.anonymous');
   const avatarFallback: string = displayName.charAt(0).toUpperCase();
 
   const handleWithdrawClick = () => {

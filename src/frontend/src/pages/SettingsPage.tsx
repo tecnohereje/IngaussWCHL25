@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Flex, Heading, Tabs } from '@radix-ui/themes';
+import { Box, Flex, Heading, Tabs, Card, Text, Button } from '@radix-ui/themes';
 import PersonalInfoTab from '../components/tabs/PersonalInfoTab';
 import SocialMediaTab from '../components/tabs/SocialMediaTab';
 import JobPreferencesTab from '../components/tabs/JobPreferencesTab';
-import { loadUserAccount, UserAccount } from '../api/mockApi';
+import { getCompleteUserAccount } from '../api/backend';
+import type { UserAccountType } from '../../../common/types';
 import { useAuth } from '../context/AuthContext';
 import Skeleton from '../components/ui/Skeleton';
+import toast from 'react-hot-toast';
 
 export interface TabComponentProps {
-  formData: Partial<UserAccount>;
-  setFormData: React.Dispatch<React.SetStateAction<Partial<UserAccount>>>;
+  formData: Partial<UserAccountType>;
+  setFormData?: React.Dispatch<React.SetStateAction<Partial<UserAccountType>>>;
 }
 
 type TabComponent = React.FC<TabComponentProps>;
@@ -23,26 +25,37 @@ interface TabInfo {
 
 const SettingsPage: React.FC = () => {
   const { t } = useTranslation();
-  const { principal } = useAuth();
+  const { identity } = useAuth();
   
-  const [formData, setFormData] = useState<Partial<UserAccount>>({});
+  const [formData, setFormData] = useState<Partial<UserAccountType>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!principal) {
+  const loadData = useCallback(async () => {
+    if (!identity) {
       setIsLoading(false);
       return;
-    };
-    const loadData = async () => {
-      setIsLoading(true);
-      const account = await loadUserAccount(principal);
+    }
+    setIsLoading(true);
+    setError(null);
+    try {
+      const account = await getCompleteUserAccount(identity);
       if (account) {
         setFormData(account);
       }
+    } catch (err) {
+      console.error("Failed to load user account:", err);
+      const errorMessage = t('settings.load_error_message');
+      setError(errorMessage);
+      toast.error(errorMessage);
+    } finally {
       setIsLoading(false);
-    };
+    }
+  }, [identity, t]);
+
+  useEffect(() => {
     loadData();
-  }, [principal]);
+  }, [loadData]);
 
   const tabContent: TabInfo[] = [
     { value: 'personal', label: t('settings.tab_personal'), Component: PersonalInfoTab },
@@ -50,12 +63,23 @@ const SettingsPage: React.FC = () => {
     { value: 'job', label: t('settings.tab_job'), Component: JobPreferencesTab },
   ];
 
-  return (
-    <Box className="settings-page" width="100%">
-      <Flex justify="between" align="center" mb="5">
-        <Heading>{t('settings.title')}</Heading>
-      </Flex>
+  const renderContent = () => {
+    if (isLoading) {
+      return <Skeleton style={{ height: '300px', width: '100%' }} />;
+    }
 
+    if (error) {
+      return (
+        <Card mt="5">
+          <Flex direction="column" gap="3" align="center">
+            <Text color="red">{error}</Text>
+            <Button onClick={loadData}>{t('common.retry_button')}</Button>
+          </Flex>
+        </Card>
+      );
+    }
+
+    return (
       <Tabs.Root defaultValue="personal" className="radix-tabs-root">
         <Tabs.List className="radix-tabs-list">
           {tabContent.map(tab => (
@@ -67,15 +91,20 @@ const SettingsPage: React.FC = () => {
         <Box pt="3">
           {tabContent.map(tab => (
             <Tabs.Content key={tab.value} value={tab.value} className="radix-tabs-content">
-              {isLoading ? (
-                <Skeleton style={{ height: '300px', width: '100%' }} />
-              ) : (
-                <tab.Component formData={formData} setFormData={setFormData} />
-              )}
+              <tab.Component formData={formData} />
             </Tabs.Content>
           ))}
         </Box>
       </Tabs.Root>
+    );
+  };
+
+  return (
+    <Box className="settings-page" width="100%">
+      <Flex justify="between" align="center" mb="5">
+        <Heading>{t('settings.title')}</Heading>
+      </Flex>
+      {renderContent()}
     </Box>
   );
 };

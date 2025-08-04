@@ -4,7 +4,7 @@ import {
     SocialLinksCandidInterface, SocialLinksType,
     JobPreferencesCandidInterface, JobPreferencesType,
     UserAccountCandidInterface, UserAccountType
-} from './types.js';
+} from '../common/types';
 
 
 const userStorage = new StableBTreeMap<Principal, UserAccountType>(0);

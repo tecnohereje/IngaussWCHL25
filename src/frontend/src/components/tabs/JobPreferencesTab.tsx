@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flex, Text, Button, Badge, Spinner } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
@@ -7,10 +7,11 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import TimeZoneModal from '../modals/TimeZoneModal';
 import { ChevronDown } from 'lucide-react';
 import { salaryRange, workplaceTags, maxWorkplaceTags } from '../../config/features';
-import { saveUserAccount } from '../../api/mockApi';
+import { updateJobPreferences } from '../../api/backend';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import { TabComponentProps } from '../../pages/SettingsPage';
+import type { JobPreferencesType } from '../../../../common/types';
 
 const TagSelector: React.FC<{ selectedTags: string[]; onTagChange: (newTags: string[]) => void; }> = ({ selectedTags, onTagChange }) => {
     const { t } = useTranslation();
@@ -40,35 +41,57 @@ const TagSelector: React.FC<{ selectedTags: string[]; onTagChange: (newTags: str
     );
 };
 
-const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData }) => {
+const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData }) => {
   const { t } = useTranslation();
-  const { principal } = useAuth();
+  const { identity, userProfile, updateUserProfile } = useAuth();
+  
+  // Flattened local state
+  const [locations, setLocations] = useState<string[]>([]);
+  const [currentSalaryRange, setCurrentSalaryRange] = useState<number[]>([salaryRange.min, salaryRange.max]);
+  const [tags, setTags] = useState<string[]>([]);
+  const [preferredTimezone, setPreferredTimezone] = useState<string>('');
+
   const [isLoading, setIsLoading] = useState(false);
   const [isTimezoneModalOpen, setIsTimezoneModalOpen] = useState<boolean>(false);
 
-  const jobData = formData.job || { locations: [], salaryRange: [salaryRange.min, salaryRange.max], tags: [], preferredTimezone: '' };
-
-  const updateJobField = <K extends keyof typeof jobData>(field: K, value: (typeof jobData)[K]) => {
-    setFormData(prev => ({
-      ...prev,
-      job: {
-        ...(prev.job || jobData),
-        [field]: value,
-      },
-    }));
-  };
+  // Sync local state with parent data
+  useEffect(() => {
+    const jobData = formData.profile?.job;
+    if (jobData) {
+      setLocations(jobData.locations || []);
+      setCurrentSalaryRange(jobData.salaryRange || [salaryRange.min, salaryRange.max]);
+      setTags(jobData.workplaceTags || []);
+      setPreferredTimezone(jobData.preferredTimezone || '');
+    }
+  }, [formData]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!principal) {
+    if (!identity) {
       toast.error(t('toasts.user_not_identified'));
       return;
     }
+
+    const jobDataToSave: JobPreferencesType = {
+        locations,
+        salaryRange: currentSalaryRange,
+        workplaceTags: tags,
+        preferredTimezone,
+    };
+
     setIsLoading(true);
     try {
-      await saveUserAccount(principal, { job: jobData });
+      await updateJobPreferences(identity, jobDataToSave);
+      // Optimistically update the global state
+      if (userProfile) {
+        updateUserProfile({ 
+          ...userProfile,
+          profile: { ...userProfile.profile, job: jobDataToSave }
+        });
+      }
       toast.success(t('settings.api_success.message'));
     } catch (error) {
+      console.error("Failed to save job preferences:", error);
       toast.error(t('settings.api_error.message'));
     } finally {
       setIsLoading(false);
@@ -80,8 +103,8 @@ const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData 
       <TimeZoneModal 
         isOpen={isTimezoneModalOpen}
         onClose={() => setIsTimezoneModalOpen(false)}
-        currentValue={jobData.preferredTimezone}
-        onValueChange={(value) => updateJobField('preferredTimezone', value)}
+        currentValue={preferredTimezone}
+        onValueChange={setPreferredTimezone}
       />
 
       <Form.Root onSubmit={handleSubmit}>
@@ -89,9 +112,9 @@ const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData 
           <Form.Field name="locations" asChild>
             <Flex direction="column" gap="1">
               <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.location')}</Text></Form.Label>
-              <ToggleGroup.Root type="multiple" className="tag-selector" value={jobData.locations} onValueChange={(value) => updateJobField('locations', value)}>
+              <ToggleGroup.Root type="multiple" className="tag-selector" value={locations} onValueChange={setLocations}>
                 {['onsite', 'hybrid', 'remote'].map(locKey => (
-                  <ToggleGroup.Item key={locKey} value={locKey} className={`tag-button ${jobData.locations.includes(locKey) ? 'selected' : ''}`}>
+                  <ToggleGroup.Item key={locKey} value={locKey} className={`tag-button ${locations.includes(locKey) ? 'selected' : ''}`}>
                     {t(`settings.job_form.location_${locKey}`)}
                   </ToggleGroup.Item>
                 ))}
@@ -102,13 +125,13 @@ const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData 
           <Form.Field name="salary" asChild>
             <Flex direction="column" gap="1">
               <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.salary')}</Text></Form.Label>
-              <Slider.Root className="slider-root" min={salaryRange.min} max={salaryRange.max} step={1000} value={jobData.salaryRange} onValueChange={(value) => updateJobField('salaryRange', value as [number, number])}>
+              <Slider.Root className="slider-root" min={salaryRange.min} max={salaryRange.max} step={1000} value={currentSalaryRange} onValueChange={setCurrentSalaryRange}>
                 <Slider.Track className="slider-track"><Slider.Range className="slider-range" /></Slider.Track>
                 <Slider.Thumb className="slider-thumb" /><Slider.Thumb className="slider-thumb" />
               </Slider.Root>
               <Flex justify="between" mt="1">
-                <Text size="1" color="gray">${jobData.salaryRange[0].toLocaleString()}</Text>
-                <Text size="1" color="gray">${jobData.salaryRange[1].toLocaleString()}</Text>
+                <Text size="1" color="gray">${currentSalaryRange[0].toLocaleString()}</Text>
+                <Text size="1" color="gray">${currentSalaryRange[1].toLocaleString()}</Text>
               </Flex>
             </Flex>
           </Form.Field>
@@ -117,9 +140,9 @@ const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData 
             <Flex direction="column" gap="1">
                 <Flex justify="between" align="center">
                   <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.workplace_tags')}</Text></Form.Label>
-                  <Badge color="gray" radius="full" size="2">{jobData.tags.length} / {maxWorkplaceTags}</Badge>
+                  <Badge color="gray" radius="full" size="2">{tags.length} / {maxWorkplaceTags}</Badge>
                 </Flex>
-                <TagSelector selectedTags={jobData.tags} onTagChange={(value) => updateJobField('tags', value)} />
+                <TagSelector selectedTags={tags} onTagChange={setTags} />
             </Flex>
           </Form.Field>
 
@@ -128,7 +151,7 @@ const JobPreferencesTab: React.FC<TabComponentProps> = ({ formData, setFormData 
               <Flex direction="column" gap="1">
                 <Form.Label asChild><Text size="2" weight="bold">{t('settings.job_form.timezone')}</Text></Form.Label>
                 <Button variant="soft" onClick={() => setIsTimezoneModalOpen(true)} type="button">
-                    <Text>{jobData.preferredTimezone || t('settings.job_form.timezone_placeholder')}</Text>
+                    <Text>{preferredTimezone || t('settings.job_form.timezone_placeholder')}</Text>
                     <ChevronDown />
                 </Button>
               </Flex>

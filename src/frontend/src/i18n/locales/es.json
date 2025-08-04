@@ -3,7 +3,8 @@
     "common": {
       "anonymous": "Anónimo",
       "wallet_identified": "Identificamos tu wallet correctamente.",
-      "not_available": "No disponible"
+      "not_available": "No disponible",
+      "retry_button": "Reintentar"
     },
     "login": {
       "welcome": "Bienvenido a Ingauss",
@@ -74,6 +75,7 @@
         "message": "Tu configuración se ha guardado correctamente.",
         "close_button": "Continuar"
       },
+      "load_error_message": "Hubo un error al cargar los datos de tu perfil. Por favor, intenta de nuevo.",
       "tags": {
         "good_culture": "Buena Cultura",
         "growth_opportunities": "Oportunidades de Crecimiento",

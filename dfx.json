@@ -1,15 +1,22 @@
 {
-    "canisters": {
-        "ingauss-backend-wchl25": {
+    "canisters": 
+    {
+        "ingauss-backend-wchl25": 
+        {
             "type": "azle",
             "main": "src/index.ts",
-            "declarations": {
-                "output": "test/dfx_generated/ingauss-backend-wchl25",
+            "declarations": 
+            {
+                "output": "src/frontend/canister-declarations",
                 "node_compatibility": true
             },
-            "custom": {
+            "custom": 
+            {
                 "experimental": true,
-                "assets": [["src/frontend/dist", "dist"]],
+                "assets":   [
+                                ["src/frontend/dist", "dist"],
+                                ["src/frontend/src/assets", "assets"]
+                            ],
                 "build_assets": "npm --prefix src/frontend run build"
             }
         }

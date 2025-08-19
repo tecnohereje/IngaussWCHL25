@@ -1,5 +1,6 @@
 import { Actor, HttpAgent, Identity } from "@dfinity/agent";
-import { idlFactory } from "../../../../.dfx/local/canisters/ingauss-backend-wchl25/service.did.js";
+import { idlFactory } from "../../canister-declarations/";
+// ../../../../.dfx/local/canisters/ingauss-backend-wchl25/service.did.js
 // Import the canister ID from canister_ids.json
 import canisterIds from "../../../../.dfx/local/canister_ids.json";
 const canisterId = canisterIds["ingauss-backend-wchl25"].local;
